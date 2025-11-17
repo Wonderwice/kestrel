@@ -95,6 +95,9 @@ jobs:
     - name: Install clang-format
       run: sudo apt-get install -y clang-format
     
+    - name: Install cloc
+      run: sudo apt-get install -y cloc
+
     - name: Check code formatting
       run: |
         find . -name "*.cpp" -o -name "*.h" | xargs clang-format --dry-run --Werror
