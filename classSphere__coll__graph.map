@@ -1,0 +1,5 @@
+<map id="Sphere" name="Sphere">
+<area shape="rect" id="Node000001" title="Sphere primitive defined by center and radius." alt="" coords="5,93,72,119"/>
+<area shape="rect" id="Node000002" href="$classVec3.html" title="A 3D vector class supporting both CPU and GPU execution." alt="" coords="12,5,65,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="41,45,41,93,36,93,36,45"/>
+</map>
