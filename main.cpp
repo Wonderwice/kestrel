@@ -12,6 +12,7 @@
 #include "camera.h"
 #include "ray.h"
 #include "sphere.h"
+#include "scene.h"
 #include "vec3.h"
 #include <fstream>
 #include <iostream>
@@ -26,9 +27,9 @@
  * If the ray hits the sphere, returns a color based on the surface normal.
  * Otherwise, returns a blue-to-white gradient for the background sky.
  */
-Color ray_color(const Ray &ray, const Sphere &sphere) {
+Color ray_color(const Ray &ray, const Scene &scene) {
   HitRecord rec;
-  if (sphere.hit(ray, 0.0f, 1000.0f, rec)) {
+  if (scene.hit(ray, 0.0f, 1000.0f, rec)) {
     // Color based on normal direction (maps -1..1 to 0..1)
     // Red = X, Green = Y, Blue = Z
     return 0.5f * (rec.normal + Vec3(1, 1, 1));
@@ -102,6 +103,11 @@ int main() {
 
   // Scene: single sphere centered at (0, 0, -1) with radius 0.5
   Sphere sphere(Point3(0, 0, -1), 0.5f);
+  Sphere ground_sphere(Point3(0, -100.5f, -1), 100.0f); // large ground sphere
+
+  Scene scene(camera);
+  scene.add_object(sphere);
+  scene.add_object(ground_sphere);
 
   // Render loop
   std::cout << "Rendering " << image_width << "x" << image_height
@@ -120,7 +126,7 @@ int main() {
 
       // Generate ray through this pixel
       Ray ray = camera.get_ray(u, v);
-      Color pixel_color = ray_color(ray, sphere);
+      Color pixel_color = ray_color(ray, scene);
 
       // Store in buffer (row-major order)
       pixels[j * image_width + i] = pixel_color;
