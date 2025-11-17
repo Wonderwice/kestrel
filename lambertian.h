@@ -33,12 +33,15 @@ public:
    */
   HOST_DEVICE Lambertian(Color albedo) : albedo(albedo) {}
 
-  HOST_DEVICE bool scatter(const Ray &incoming, const HitRecord &rec, Color& attenuation, Ray& scattered) const {
+  HOST_DEVICE bool scatter(const Ray &incoming, const HitRecord &rec,
+                           Color &attenuation, Ray &scattered) const {
     Vec3 scatter_direction = rec.normal + Vec3::random_unit_vector();
     scattered = Ray(rec.point, scatter_direction);
     attenuation = albedo;
     return true;
   }
+
+  HOST_DEVICE Color get_color() const { return albedo; }
 
 private:
   Color albedo;

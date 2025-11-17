@@ -12,6 +12,7 @@
 #include "main.h"
 #include "camera.h"
 #include "lambertian.h"
+#include "light.h"
 #include "ray.h"
 #include "scene.h"
 #include "sphere.h"
@@ -30,29 +31,43 @@
  * If the ray hits the sphere, returns a color based on the surface normal.
  * Otherwise, returns a blue-to-white gradient for the background sky.
  */
-Color ray_color(const Ray &ray, const Scene &scene, int depth = 10) {
+Color ray_color(const Ray &ray, const Scene &scene, const Light &light,
+                int depth = 10) {
   // Limit recursion depth to prevent stack overflow
   if (depth <= 0) {
     return Color(0, 0, 0); // Return black if max depth reached
   }
 
   HitRecord rec;
-  if (scene.hit(ray, 0.001f, 1000.0f,
-                rec)) { // Use small epsilon to avoid shadow acne
-    // Color based on normal direction (maps -1..1 to 0..1)
-    // Red = X, Green = Y, Blue = Z
-    Lambertian lambertian(Color(0.7f, 0.6f, 0.5f));
+  if (scene.hit(ray, 0.001f, 1000.0f, rec)) {
+    Lambertian lambertian(Color(1.0f, 0.55f, 0.7f)); // albedo
     Color attenuation;
     Ray scattered;
-    if (lambertian.scatter(ray, rec, attenuation, scattered)) {
-      return attenuation * ray_color(scattered, scene, depth - 1);
-    }
-  }
 
-  // Background: blue-to-white vertical gradient
-  Vec3 unit_direction = ray.direction.normalized();
-  float t = 0.5f * (unit_direction.y + 1.0f);
-  return (1.0f - t) * Color(1.0f, 1.0f, 1.0f) + t * Color(0.5f, 0.7f, 1.0f);
+    // Calculate direct lighting
+    Vec3 light_dir = (light.position - rec.point).normalized();
+    float cos_theta = fmax(0.0f, Vec3::dot(rec.normal, light_dir));
+
+    // Check for shadows - offset ray origin to avoid self-intersection
+    Vec3 shadow_origin = rec.point + rec.normal * 0.001f;
+    Ray shadow_ray(shadow_origin, light_dir);
+    HitRecord shadow_rec;
+    float light_distance = (light.position - rec.point).length();
+    if (scene.hit(shadow_ray, 0.001f, light_distance - 0.001f, shadow_rec)) {
+      return Color(0, 0, 0); // In shadow, return black
+    }
+
+    // Add some ambient lighting to prevent completely black shadows
+    Color ambient_light = lambertian.get_color() * 0.2f;
+    
+    // Calculate direct lighting with proper distance falloff
+    float distance = (light.position - rec.point).length();
+    Color direct_lighting = lambertian.get_color() * cos_theta * 
+                           light.get_intensity() * (1.0f / (distance * distance));
+
+    return ambient_light + direct_lighting;
+  }
+  return Color(0.5f, 0.5f, 0.5f);
 }
 
 /**
@@ -102,9 +117,9 @@ void write_ppm(const std::string &filename, const std::vector<Color> &pixels,
 int main() {
   // Image settings
   const float aspect_ratio = 16.0f / 9.0f;
-  const int image_width = 800;
+  const int image_width = 600;
   const int image_height = static_cast<int>(image_width / aspect_ratio);
-  const int samples_per_pixel = 10;
+  const int samples_per_pixel = 32;
 
   // Allocate pixel buffer
   std::vector<Color> pixels(image_width * image_height);
@@ -123,6 +138,9 @@ int main() {
   Scene scene(camera);
   scene.add_object(sphere);
   scene.add_object(ground_sphere);
+
+  // Light setup
+  Light light(Point3(2, 4, 1), Vec3(1, 1, 1)); // White light positioned for optimal lighting
 
   // Render loop
   std::cout << "Rendering " << image_width << "x" << image_height
@@ -146,7 +164,7 @@ int main() {
 
         // Generate ray through this pixel
         Ray ray = camera.get_ray(u, v);
-        Color sample_color = ray_color(ray, scene);
+        Color sample_color = ray_color(ray, scene, light);
         pixels[j * image_width + i] += sample_color;
       }
       // Average samples and store final pixel color
