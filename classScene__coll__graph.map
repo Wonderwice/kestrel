@@ -1,0 +1,5 @@
+<map id="Scene" name="Scene">
+<area shape="rect" id="Node000001" title="Represents a 3D scene with a camera and objects." alt="" coords="11,93,73,119"/>
+<area shape="rect" id="Node000002" href="$classCamera.html" title="Perspective camera with configurable field of view." alt="" coords="5,5,79,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="45,45,45,93,39,93,39,45"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="lambertian.h" name="lambertian.h">
+<area shape="rect" id="Node000001" title="Lambertian diffuse reflection model for ray tracing." alt="" coords="111,5,217,31"/>
+<area shape="rect" id="Node000002" href="$camera_8h.html" title="Pinhole camera model for ray generation." alt="" coords="5,79,88,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,33,79,74,76,69,144,28"/>
+<area shape="rect" id="Node000003" href="$ray_8h.html" title="Ray representation for ray tracing." alt="" coords="101,152,155,177"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="164,32,137,139,132,138,158,30"/>
+<area shape="rect" id="Node000004" href="$vec3_8h.html" title="3D vector mathematics for CPU and GPU execution" alt="" coords="134,225,199,251"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="197,28,230,47,245,61,257,77,264,97,264,117,258,137,249,156,222,191,194,218,190,215,218,188,244,154,253,135,259,117,259,98,252,80,241,65,227,52,194,33"/>
+<area shape="rect" id="Node000007" href="$sphere_8h.html" title="Sphere primitive with ray intersection." alt="" coords="163,79,242,104"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="173,30,192,65,188,68,168,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="61,102,106,141,103,145,58,106"/>
+<area shape="poly" id="edge6_Node000002_Node000004" title=" " alt="" coords="53,103,67,137,91,176,113,197,137,215,134,220,110,201,87,179,63,140,48,105"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="137,176,156,212,152,215,132,179"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="87,299,150,324"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="161,253,136,289,132,286,157,250"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="175,299,255,324"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="177,250,202,286,197,289,172,253"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="193,106,152,144,148,141,189,102"/>
+<area shape="poly" id="edge10_Node000007_Node000004" title=" " alt="" coords="202,105,175,213,170,211,197,104"/>
+</map>

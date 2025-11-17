@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['set_5fface_5fnormal_0',['set_face_normal',['../structHitRecord.html#a2cd89fb5a065e6a3464f805ba1629fb1',1,'HitRecord']]],
-  ['sphere_1',['sphere',['../classSphere.html',1,'Sphere'],['../classSphere.html#a890a63ff583cb88e7ec4e840b4ef5eb9',1,'Sphere::Sphere()'],['../classSphere.html#a050fe66a38f3dab3cfb9ba7cbb8630eb',1,'Sphere::Sphere(Point3 center, float radius)']]],
-  ['sphere_2eh_2',['sphere.h',['../sphere_8h.html',1,'']]]
+  ['radius_0',['radius',['../classSphere.html#ae6f42f0da6679a2f0b4a22681ccccf38',1,'Sphere']]],
+  ['ray_1',['ray',['../classRay.html',1,'Ray'],['../classRay.html#a2e3d2c29f2df4ab3da10da79d4acb852',1,'Ray::Ray()'],['../classRay.html#a1f229bfde83d8fa9c050253d405fdd8d',1,'Ray::Ray(const Point3 &amp;origin, const Vec3 &amp;direction)']]],
+  ['ray_2eh_2',['ray.h',['../ray_8h.html',1,'']]],
+  ['ray_5fcolor_3',['ray_color',['../main_8cpp.html#aecf5d55490bb9788f3c7cb3f22926184',1,'main.cpp']]]
 ];

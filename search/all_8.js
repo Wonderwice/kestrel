@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['normal_0',['normal',['../structHitRecord.html#a59eac6b0a45071147d4c6bd18bc53684',1,'HitRecord']]],
-  ['normalized_1',['normalized',['../classVec3.html#ae9a32a15ee612fd8a5aeb6d32ec5f666',1,'Vec3']]]
+  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
+  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]]
 ];

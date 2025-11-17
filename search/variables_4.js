@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['origin_0',['origin',['../classRay.html#af02b2b999fe8538e92ac5e534c68ae5f',1,'Ray']]]
+  ['normal_0',['normal',['../structHitRecord.html#a59eac6b0a45071147d4c6bd18bc53684',1,'HitRecord']]]
 ];
