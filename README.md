@@ -5,15 +5,18 @@
 
 A rendering engine built in C++/CUDA.
 
-## Current Features (v0.1)
+## Current Features (v0.2)
 
-- ✅ Basic ray-sphere intersection
-- ✅ Simple pinhole camera model
-- ✅ Surface normal visualization
-- ✅ PPM image output
-- ✅ Full Doxygen documentation
-- ✅ Automated CI/CD pipeline
-- ✅ GitHub Pages deployment
+- Basic ray-sphere intersection
+- Simple pinhole camera model
+- Surface normal visualization
+- PPM image output
+- Full Doxygen documentation
+- Automated CI/CD pipeline
+- GitHub Pages deployment
+- Direct lighting
+- Lambertian material
+- Point light
 
 ## Project Structure
 
@@ -65,11 +68,11 @@ The documentation includes:
 ## CI/CD Pipeline
 
 Every push to `main` automatically:
-1. ✅ Builds on Ubuntu and macOS (Release + Debug)
-2. ✅ Runs test renders to verify correctness
-3. ✅ Generates and deploys documentation to GitHub Pages
-4. ✅ Checks code formatting and quality
-5. ✅ Uploads render artifacts
+1. Builds on Ubuntu and macOS (Release + Debug)
+2. Runs test renders to verify correctness
+3. Generates and deploys documentation to GitHub Pages
+4. Checks code formatting and quality
+5. Uploads render artifacts
 
 View pipeline results: [GitHub Actions](https://github.com/Wonderwice/kestrel/actions)
 
