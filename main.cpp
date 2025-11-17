@@ -11,28 +11,37 @@
 
 #include "camera.h"
 #include "ray.h"
-#include "sphere.h"
 #include "scene.h"
+#include "sphere.h"
 #include "vec3.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include "main.h"
 
 /**
  * @brief Determine pixel color by tracing a ray through the scene
  * @param ray The ray to trace
- * @param sphere The sphere to test for intersection
+ * @param scene The scene to test for intersection
+ * @param depth Current recursion depth
  * @return RGB color for this ray
  *
  * If the ray hits the sphere, returns a color based on the surface normal.
  * Otherwise, returns a blue-to-white gradient for the background sky.
  */
-Color ray_color(const Ray &ray, const Scene &scene) {
+Color ray_color(const Ray &ray, const Scene &scene, int depth = 10) {
+  // Limit recursion depth to prevent stack overflow
+  if (depth <= 0) {
+    return Color(0, 0, 0); // Return black if max depth reached
+  }
+
   HitRecord rec;
-  if (scene.hit(ray, 0.0f, 1000.0f, rec)) {
+  if (scene.hit(ray, 0.001f, 1000.0f,
+                rec)) { // Use small epsilon to avoid shadow acne
     // Color based on normal direction (maps -1..1 to 0..1)
     // Red = X, Green = Y, Blue = Z
-    return 0.5f * (rec.normal + Vec3(1, 1, 1));
+    Vec3 direction = rec.normal + Vec3::random_unit_vector(); // Lambertian diffuse
+    return 0.5f * ray_color(Ray(rec.point, direction), scene, depth - 1);
   }
 
   // Background: blue-to-white vertical gradient
@@ -88,8 +97,9 @@ void write_ppm(const std::string &filename, const std::vector<Color> &pixels,
 int main() {
   // Image settings
   const float aspect_ratio = 16.0f / 9.0f;
-  const int image_width = 1920;
+  const int image_width = 800;
   const int image_height = static_cast<int>(image_width / aspect_ratio);
+  const int samples_per_pixel = 10;
 
   // Allocate pixel buffer
   std::vector<Color> pixels(image_width * image_height);
@@ -120,16 +130,22 @@ int main() {
     }
 
     for (int i = 0; i < image_width; ++i) {
-      // Calculate normalized pixel coordinates [0, 1]
-      float u = float(i) / (image_width - 1);
-      float v = float(j) / (image_height - 1);
+      for(int s = 0; s < samples_per_pixel; ++s) {
+        // Anti-aliasing: random offset within pixel
+        float u = (i + static_cast<float>(rand()) /
+                          static_cast<float>(RAND_MAX)) /
+                  (image_width - 1);
+        float v = (j + static_cast<float>(rand()) /
+                          static_cast<float>(RAND_MAX)) /
+                  (image_height - 1);
 
-      // Generate ray through this pixel
-      Ray ray = camera.get_ray(u, v);
-      Color pixel_color = ray_color(ray, scene);
-
-      // Store in buffer (row-major order)
-      pixels[j * image_width + i] = pixel_color;
+        // Generate ray through this pixel
+        Ray ray = camera.get_ray(u, v);
+        Color sample_color = ray_color(ray, scene);
+        pixels[j * image_width + i] += sample_color;
+      }
+      // Average samples and store final pixel color
+      pixels[j * image_width + i] *= 1.0f / static_cast<float>(samples_per_pixel);
     }
   }
 

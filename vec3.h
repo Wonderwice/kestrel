@@ -152,6 +152,43 @@ public:
     return Vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z,
                 a.x * b.y - a.y * b.x);
   }
+
+  HOST_DEVICE static Vec3 random(float min, float max) {
+    return Vec3(min + static_cast<float>(rand()) /
+                          (static_cast<double>(RAND_MAX) / (max - min)),
+                min + static_cast<float>(rand()) /
+                          (static_cast<double>(RAND_MAX) / (max - min)),
+                min + static_cast<float>(rand()) /
+                          (static_cast<double>(RAND_MAX) / (max - min)));
+  }
+
+  HOST_DEVICE static Vec3 random_unit_vector() {
+    float a = static_cast<float>(rand()) /
+              (static_cast<float>(RAND_MAX) / (2.0f * M_PI));
+    float z = static_cast<float>(rand()) /
+              (static_cast<float>(RAND_MAX) / 2.0f) -
+              1.0f;
+    float r = std::sqrt(1.0f - z * z);
+    return Vec3(r * std::cos(a), r * std::sin(a), z);
+  }
+
+  HOST_DEVICE static Vec3 random_in_unit_sphere() {
+    while (true) {
+      Vec3 p = Vec3::random(-1.0f, 1.0f);
+      if (p.length_squared() >= 1.0f)
+        continue;
+      return p;
+    }
+  }
+
+  HOST_DEVICE static Vec3 random_on_hemisphere(const Vec3 &normal) {
+    Vec3 in_unit_sphere = random_in_unit_sphere();
+    if (Vec3::dot(in_unit_sphere, normal) > 0.0f) {
+      return in_unit_sphere;
+    } else {
+      return in_unit_sphere * -1.0f;
+    }
+  }
 };
 
 /**
@@ -160,7 +197,7 @@ public:
  * @param v Vector to multiply
  * @return Scaled vector
  */
-HOST_DEVICE inline Vec3 operator*(float t, const Vec3 &v) { return v * t; }
+HOST_DEVICE inline Vec3 operator*(float t, const Vec3 &v) { return Vec3(t * v.x, t * v.y, t * v.z); }
 
 /**
  * @brief Stream output operator for debugging
