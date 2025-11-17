@@ -9,7 +9,9 @@
  * and colors pixels based on surface normals. Output is written to PPM format.
  */
 
+#include "main.h"
 #include "camera.h"
+#include "lambertian.h"
 #include "ray.h"
 #include "scene.h"
 #include "sphere.h"
@@ -17,7 +19,6 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include "main.h"
 
 /**
  * @brief Determine pixel color by tracing a ray through the scene
@@ -40,8 +41,12 @@ Color ray_color(const Ray &ray, const Scene &scene, int depth = 10) {
                 rec)) { // Use small epsilon to avoid shadow acne
     // Color based on normal direction (maps -1..1 to 0..1)
     // Red = X, Green = Y, Blue = Z
-    Vec3 direction = rec.normal + Vec3::random_unit_vector(); // Lambertian diffuse
-    return 0.5f * ray_color(Ray(rec.point, direction), scene, depth - 1);
+    Lambertian lambertian(Color(0.7f, 0.6f, 0.5f));
+    Color attenuation;
+    Ray scattered;
+    if (lambertian.scatter(ray, rec, attenuation, scattered)) {
+      return attenuation * ray_color(scattered, scene, depth - 1);
+    }
   }
 
   // Background: blue-to-white vertical gradient
@@ -130,14 +135,14 @@ int main() {
     }
 
     for (int i = 0; i < image_width; ++i) {
-      for(int s = 0; s < samples_per_pixel; ++s) {
+      for (int s = 0; s < samples_per_pixel; ++s) {
         // Anti-aliasing: random offset within pixel
-        float u = (i + static_cast<float>(rand()) /
-                          static_cast<float>(RAND_MAX)) /
-                  (image_width - 1);
-        float v = (j + static_cast<float>(rand()) /
-                          static_cast<float>(RAND_MAX)) /
-                  (image_height - 1);
+        float u =
+            (i + static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) /
+            (image_width - 1);
+        float v =
+            (j + static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) /
+            (image_height - 1);
 
         // Generate ray through this pixel
         Ray ray = camera.get_ray(u, v);
@@ -145,7 +150,8 @@ int main() {
         pixels[j * image_width + i] += sample_color;
       }
       // Average samples and store final pixel color
-      pixels[j * image_width + i] *= 1.0f / static_cast<float>(samples_per_pixel);
+      pixels[j * image_width + i] *=
+          1.0f / static_cast<float>(samples_per_pixel);
     }
   }
 
