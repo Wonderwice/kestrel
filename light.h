@@ -23,6 +23,7 @@ public:
     return (position - point).normalized();
   }
 
+
   Vec3 get_intensity() const { return intensity; }
 
   Vec3 position;  ///< Position of the light source

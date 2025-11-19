@@ -19,6 +19,7 @@ class Scene {
 public:
   Camera camera;               ///< Camera used for rendering
   std::vector<Sphere> objects; ///< List of objects in the scene
+  std::vector<Light> lights;   ///< List of lights in the scene
 
   /**
    * @brief Construct a new Scene object
@@ -31,6 +32,10 @@ public:
    * @param obj Sphere object to add
    */
   HOST_DEVICE void add_object(const Sphere &obj) { objects.push_back(obj); }
+
+  HOST_DEVICE void add_lights(const Light &light) {
+    lights.push_back(light);
+  }
 
   /**
    * @brief Test ray against all objects in the scene for intersection
@@ -52,6 +57,7 @@ public:
       if (obj.hit(ray, t_min, closest_so_far, rec)) {
         hit_anything = true;
         closest_so_far = rec.t;
+        rec.material = &obj.material;
       }
     }
 
