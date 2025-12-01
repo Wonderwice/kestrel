@@ -18,11 +18,11 @@
 #include "scene.h"
 #include "sphere.h"
 #include "vec3.h"
+#include <atomic>
 #include <fstream>
 #include <iostream>
 #include <thread>
 #include <vector>
-#include <atomic>
 
 /**
  * @brief Determine pixel color by tracing a ray through the scene
@@ -100,6 +100,65 @@ Color ray_color(const Ray &ray, const Scene &scene, int depth = 10) {
 }
 
 /**
+ * @brief Render the scene into the pixel buffer using multithreading
+ * @param scene The scene to render
+ * @param camera The camera through which to render
+ * @param image_width Width of the image in pixels
+ * @param image_height Height of the image in pixels
+ * @param samples_per_pixel Number of samples per pixel for anti-aliasing
+ * @param pixels Output pixel buffer (size = image_width * image_height)
+ * @param num_threads Number of threads to use for rendering
+ *
+ * This function divides the rendering workload across multiple threads,
+ * each processing scanlines of the image until all rows are completed.
+ */
+void render_scene(const Scene &scene, const Camera &camera, int image_width,
+                  int image_height, int samples_per_pixel,
+                  std::vector<Color> &pixels, int num_threads) {
+  // Render loop
+  std::cout << "Rendering " << image_width << "x" << image_height
+            << " image...\n";
+
+  // Parallelize with std::thread
+  std::vector<std::thread> threads;
+  std::atomic<int> next_row(0);
+  // Initialize PCG random number generator
+  PCG32 rng;
+  auto render_worker = [&](int thread_id) {
+    PCG32 thread_rng(rng.next() + thread_id); // Per-thread RNG
+    while (true) {
+      int j = next_row.fetch_add(1);
+      if (j >= image_height)
+        break;
+
+      if (j % 50 == 0 && thread_id == 0) {
+        std::cout << "Scanline " << j << "/" << image_height << "\n";
+      }
+
+      for (int i = 0; i < image_width; ++i) {
+        Color pixel_color(0, 0, 0);
+        for (int s = 0; s < samples_per_pixel; ++s) {
+          float u = (i + thread_rng.next_float()) / (image_width - 1);
+          float v = (j + thread_rng.next_float()) / (image_height - 1);
+          Ray ray = camera.get_ray(u, v);
+          pixel_color += ray_color(ray, scene);
+        }
+        pixel_color *= 1.0f / static_cast<float>(samples_per_pixel);
+        pixels[j * image_width + i] = pixel_color;
+      }
+    }
+  };
+
+  // Launch threads
+  for (int t = 0; t < num_threads; ++t) {
+    threads.emplace_back(render_worker, t);
+  }
+  for (auto &th : threads) {
+    th.join();
+  }
+}
+
+/**
  * @brief Write image data to PPM file format
  * @param filename Output filename (should end in .ppm)
  * @param pixels Array of RGB colors, size width * height
@@ -161,15 +220,16 @@ int main(int argc, char **argv) {
   }
 
   int num_threads = -1;
-  if(argc >=4){
-      num_threads = std::max((int)std::thread::hardware_concurrency(), std::stoi(argv[3]));
+  if (argc >= 4) {
+    num_threads =
+        std::max((int)std::thread::hardware_concurrency(), std::stoi(argv[3]));
   } else {
-      num_threads = std::thread::hardware_concurrency();
+    num_threads = std::thread::hardware_concurrency();
   }
 
-  if(argc >=5){
-      std::cout << "Usage: " << argv[0] << " [image_width] [image_height]\n";
-      return 1;
+  if (argc >= 5) {
+    std::cout << "Usage: " << argv[0] << " [image_width] [image_height]\n";
+    return 1;
   }
 
   // Allocate pixel buffer
@@ -215,53 +275,12 @@ int main(int argc, char **argv) {
   scene.add_object(sphere7);
   scene.add_object(sphere8);
   scene.add_object(sphere9);
-  scene.add_lights(light2);
-  scene.add_lights(light3);
-  scene.add_lights(light4);
+  scene.add_light(light2);
+  scene.add_light(light3);
+  scene.add_light(light4);
 
-  // Initialize PCG random number generator
-  PCG32 rng;
-
-  // Render loop
-  std::cout << "Rendering " << image_width << "x" << image_height
-            << " image...\n";
-
-  // Parallelize with std::thread
-  std::vector<std::thread> threads;
-  std::atomic<int> next_row(0);
-
-  auto render_worker = [&](int thread_id) {
-    PCG32 thread_rng(rng.next() + thread_id); // Per-thread RNG
-    while (true) {
-      int j = next_row.fetch_add(1);
-      if (j >= image_height)
-        break;
-
-      if (j % 50 == 0 && thread_id == 0) {
-        std::cout << "Scanline " << j << "/" << image_height << "\n";
-      }
-
-      for (int i = 0; i < image_width; ++i) {
-        Color pixel_color(0, 0, 0);
-        for (int s = 0; s < samples_per_pixel; ++s) {
-          float u = (i + thread_rng.next_float()) / (image_width - 1);
-          float v = (j + thread_rng.next_float()) / (image_height - 1);
-          Ray ray = camera.get_ray(u, v);
-          pixel_color += ray_color(ray, scene);
-        }
-        pixel_color *= 1.0f / static_cast<float>(samples_per_pixel);
-        pixels[j * image_width + i] = pixel_color;
-      }
-    }
-  };
-
-  // Launch threads
-  for (int t = 0; t < num_threads; ++t) {
-    threads.emplace_back(render_worker, t);
-  }
-  for (auto &th : threads) {
-    th.join();
-  }
+  render_scene(scene, camera, image_width, image_height, samples_per_pixel,
+               pixels, num_threads);
 
   // Write output file
   write_ppm("output.ppm", pixels, image_width, image_height);

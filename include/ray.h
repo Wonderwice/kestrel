@@ -32,15 +32,14 @@ public:
    * @param origin Starting point of the ray
    * @param direction Direction vector of the ray
    */
-  HOST_DEVICE Ray(const Point3 &origin, const Vec3 &direction)
-      : origin(origin), direction(direction) {}
+  HOST_DEVICE Ray(const Point3 &origin, const Vec3 &direction);
 
   /**
    * @brief Evaluate ray at parameter t
    * @param t Parameter value (distance along ray)
    * @return Point on the ray at distance t: origin + t * direction
    */
-  HOST_DEVICE Point3 at(float t) const { return origin + t * direction; }
+  HOST_DEVICE Point3 at(float t) const;
 };
 
 #endif

@@ -9,6 +9,7 @@
 #define SCENE_H
 
 #include "camera.h"
+#include "light.h"
 #include "sphere.h"
 #include <vector>
 
@@ -33,9 +34,7 @@ public:
    */
   HOST_DEVICE void add_object(const Sphere &obj) { objects.push_back(obj); }
 
-  HOST_DEVICE void add_lights(const Light &light) {
-    lights.push_back(light);
-  }
+  HOST_DEVICE void add_light(const Light &light) { lights.push_back(light); }
 
   /**
    * @brief Test ray against all objects in the scene for intersection
@@ -49,20 +48,7 @@ public:
    * point along the ray within the specified t range.
    */
   HOST_DEVICE bool hit(const Ray &ray, float t_min, float t_max,
-                       HitRecord &rec) const {
-    bool hit_anything = false;
-    float closest_so_far = t_max;
-
-    for (const auto &obj : objects) {
-      if (obj.hit(ray, t_min, closest_so_far, rec)) {
-        hit_anything = true;
-        closest_so_far = rec.t;
-        rec.material = obj.material;
-      }
-    }
-
-    return hit_anything;
-  }
+                       HitRecord &rec) const;
 };
 
 #endif // SCENE_H

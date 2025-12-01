@@ -33,13 +33,13 @@ public:
   /**
    * @brief Default constructor - initializes to zero vector
    */
-  HOST_DEVICE Vec3() : x(0), y(0), z(0) {}
+  HOST_DEVICE Vec3();
 
   /**
    * @brief Construct vector with all components set to the same value
    * @param v Value for x, y, and z components
    */
-  HOST_DEVICE Vec3(float v) : x(v), y(v), z(v) {}
+  HOST_DEVICE Vec3(float v);
 
   /**
    * @brief Construct vector from three components
@@ -47,101 +47,73 @@ public:
    * @param y Y component
    * @param z Z component
    */
-  HOST_DEVICE Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
-
+  HOST_DEVICE Vec3(float x, float y, float z);
   /**
    * @brief Vector addition
    * @param v Vector to add
    * @return Sum of this vector and v
    */
-  HOST_DEVICE Vec3 operator+(const Vec3 &v) const {
-    return Vec3(x + v.x, y + v.y, z + v.z);
-  }
+  HOST_DEVICE Vec3 operator+(const Vec3 &v) const;
 
   /**
    * @brief Vector subtraction
    * @param v Vector to subtract
    * @return Difference of this vector and v
    */
-  HOST_DEVICE Vec3 operator-(const Vec3 &v) const {
-    return Vec3(x - v.x, y - v.y, z - v.z);
-  }
+  HOST_DEVICE Vec3 operator-(const Vec3 &v) const;
 
   /**
    * @brief Scalar multiplication
    * @param t Scalar value
    * @return This vector scaled by t
    */
-  HOST_DEVICE Vec3 operator*(float t) const {
-    return Vec3(x * t, y * t, z * t);
-  }
+  HOST_DEVICE Vec3 operator*(float t) const;
 
   /**
    * @brief Component-wise multiplication
    * @param v Vector to multiply with
    * @return Component-wise product
    */
-  HOST_DEVICE Vec3 operator*(const Vec3 &v) const {
-    return Vec3(x * v.x, y * v.y, z * v.z);
-  }
+  HOST_DEVICE Vec3 operator*(const Vec3 &v) const;
 
   /**
    * @brief Scalar division
    * @param t Scalar divisor
    * @return This vector divided by t
    */
-  HOST_DEVICE Vec3 operator/(float t) const {
-    return Vec3(x / t, y / t, z / t);
-  }
+  HOST_DEVICE Vec3 operator/(float t) const;
 
   /**
    * @brief In-place vector addition
    * @param v Vector to add
    * @return Reference to this vector after addition
    */
-  HOST_DEVICE Vec3 &operator+=(const Vec3 &v) {
-    x += v.x;
-    y += v.y;
-    z += v.z;
-    return *this;
-  }
+  HOST_DEVICE Vec3 &operator+=(const Vec3 &v);
 
   /**
    * @brief In-place scalar multiplication
    * @param t Scalar multiplier
    * @return Reference to this vector after scaling
    */
-  HOST_DEVICE Vec3 &operator*=(float t) {
-    x *= t;
-    y *= t;
-    z *= t;
-    return *this;
-  }
+  HOST_DEVICE Vec3 &operator*=(float t);
 
   /**
    * @brief Calculate the length (magnitude) of the vector
    * @return Euclidean length of the vector
    */
-  HOST_DEVICE float length() const { return std::sqrt(x * x + y * y + z * z); }
+  HOST_DEVICE float length() const;
 
   /**
    * @brief Calculate the squared length of the vector
    * @return Squared Euclidean length (avoids sqrt for performance)
    */
-  HOST_DEVICE float length_squared() const { return x * x + y * y + z * z; }
+  HOST_DEVICE float length_squared() const;
 
   /**
    * @brief Get a unit-length version of this vector
    * @return Normalized vector with length 1
    */
-  HOST_DEVICE Vec3 normalized() const {
-    float len = length();
-    if (len == 0.0f) {
-      // Avoid division by zero — return a safe default zero vector
-      return Vec3(0.0f, 0.0f, 0.0f);
-    }
-    return Vec3(x / len, y / len, z / len);
-  }
+  HOST_DEVICE Vec3 normalized() const;
 
   /**
    * @brief Compute dot product of two vectors
@@ -149,9 +121,7 @@ public:
    * @param b Second vector
    * @return Scalar dot product a · b
    */
-  HOST_DEVICE static float dot(const Vec3 &a, const Vec3 &b) {
-    return a.x * b.x + a.y * b.y + a.z * b.z;
-  }
+  HOST_DEVICE static float dot(const Vec3 &a, const Vec3 &b);
 
   /**
    * @brief Compute cross product of two vectors
@@ -159,10 +129,7 @@ public:
    * @param b Second vector
    * @return Vector perpendicular to both a and b (a × b)
    */
-  HOST_DEVICE static Vec3 cross(const Vec3 &a, const Vec3 &b) {
-    return Vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z,
-                a.x * b.y - a.y * b.x);
-  }
+  HOST_DEVICE static Vec3 cross(const Vec3 &a, const Vec3 &b);
 
   /**
    * @brief Generate a random vector with each component in [min, max]
@@ -170,38 +137,13 @@ public:
    * @param max Maximum component value
    * @return Random vector
    */
-  HOST_DEVICE static Vec3 random(float min, float max) {
-    PCG32 rng;
-    return Vec3(rng.next_float() * (max - min) + min,
-                rng.next_float() * (max - min) + min,
-                rng.next_float() * (max - min) + min);
-  }
+  HOST_DEVICE static Vec3 random(float min, float max);
 
-  HOST_DEVICE static Vec3 random_unit_vector() {
-    PCG32 rng;
-    float a = rng.next_float() * (2.0f * M_PI);
-    float z = rng.next_float() * 2.0f - 1.0f;
-    float r = std::sqrt(1.0f - z * z);
-    return Vec3(r * std::cos(a), r * std::sin(a), z);
-  }
+  HOST_DEVICE static Vec3 random_unit_vector();
 
-  HOST_DEVICE static Vec3 random_in_unit_sphere() {
-    while (true) {
-      Vec3 p = Vec3::random(-1.0f, 1.0f);
-      if (p.length_squared() >= 1.0f)
-        continue;
-      return p;
-    }
-  }
+  HOST_DEVICE static Vec3 random_in_unit_sphere();
 
-  HOST_DEVICE static Vec3 random_on_hemisphere(const Vec3 &normal) {
-    Vec3 in_unit_sphere = random_in_unit_sphere();
-    if (Vec3::dot(in_unit_sphere, normal) > 0.0f) {
-      return in_unit_sphere;
-    } else {
-      return in_unit_sphere * -1.0f;
-    }
-  }
+  HOST_DEVICE static Vec3 random_on_hemisphere(const Vec3 &normal);
 };
 
 /**
@@ -210,9 +152,7 @@ public:
  * @param v Vector to multiply
  * @return Scaled vector
  */
-HOST_DEVICE inline Vec3 operator*(float t, const Vec3 &v) {
-  return Vec3(t * v.x, t * v.y, t * v.z);
-}
+HOST_DEVICE Vec3 operator*(float t, const Vec3 &v);
 
 /**
  * @brief Reflect vector v around normal n
@@ -220,9 +160,7 @@ HOST_DEVICE inline Vec3 operator*(float t, const Vec3 &v) {
  * @param n Normal vector
  * @return Reflected vector
  */
-HOST_DEVICE inline Vec3 reflect(const Vec3 &v, const Vec3 &n) {
-  return v - 2.0f * Vec3::dot(v, n) * n;
-}
+HOST_DEVICE Vec3 reflect(const Vec3 &v, const Vec3 &n);
 
 /**
  * @brief Stream output operator for debugging
@@ -230,10 +168,7 @@ HOST_DEVICE inline Vec3 reflect(const Vec3 &v, const Vec3 &n) {
  * @param v Vector to output
  * @return Reference to output stream
  */
-inline std::ostream &operator<<(std::ostream &out, const Vec3 &v) {
-  return out << "Vec3(" << v.x << ", " << v.y << ", " << v.z << ")";
-}
-
+std::ostream &operator<<(std::ostream &out, const Vec3 &v);
 /// Type alias for 3D points
 using Point3 = Vec3;
 

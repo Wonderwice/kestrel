@@ -13,24 +13,37 @@ endif()
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 
+
 # Source files
 set(SOURCES
     src/kestrel.cpp
+    src/bsdfs/conductor.cpp
+    src/bsdfs/lambertian.cpp
+    src/vec3.cpp
+    src/camera.cpp
+    src/light.cpp
+    src/ray.cpp
+    src/scene.cpp
+    src/sphere.cpp
 )
 
-# Headers (for IDE)
+# Headers
 set(HEADERS
-    src/vec3.h
-    src/ray.h
-    src/sphere.h
-    src/camera.h
+    include/vec3.h
+    include/ray.h
+    include/sphere.h
+    include/camera.h
+    include/light.h
+    include/scene.h
+    include/pcg32.h
+    include/kestrel.h
 )
 
 # Executable
 add_executable(kestrel ${SOURCES} ${HEADERS})
 
 # Include directories
-target_include_directories(kestrel PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_include_directories(kestrel PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Print build info
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")

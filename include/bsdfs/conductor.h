@@ -45,20 +45,13 @@ public:
    * and the surface normal at the hit point.
    */
   HOST_DEVICE bool scatter(const Ray &incoming, const HitRecord &rec,
-                           Color &attenuation, Ray &scattered) const {
-    Vec3 scatter_direction =
-        incoming.direction -
-        2.0f * Vec3::dot(incoming.direction, rec.normal) * rec.normal;
-    scattered = Ray(rec.point, scatter_direction);
-    attenuation = albedo;
-    return true;
-  }
+                           Color &attenuation, Ray &scattered) const;
 
   /**
    * @brief Get the color of the conductor
    * @return Albedo color
    */
-  HOST_DEVICE Color get_color() const { return albedo; }
+  HOST_DEVICE Color get_color() const;
 
 private:
   Color albedo;

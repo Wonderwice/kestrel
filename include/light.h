@@ -28,12 +28,9 @@ public:
    * @param point Point in space from which to sample the light direction
    * @return Normalized direction vector from point to light
    */
-  Vec3 sample_direction(const Vec3 &point) const {
-    // Sample direction from point to light position
-    return (position - point).normalized();
-  }
+  Vec3 sample_direction(const Vec3 &point) const;
 
-  Vec3 get_intensity() const { return intensity; }
+  Vec3 get_intensity() const;
 
   Vec3 position;  ///< Position of the light source
   Vec3 intensity; ///< Color/intensity of the light source
