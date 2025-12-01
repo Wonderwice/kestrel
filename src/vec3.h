@@ -8,6 +8,7 @@
 #ifndef VEC3_H
 #define VEC3_H
 
+#include "pcg32.h"
 #include <cmath>
 #include <iostream>
 
@@ -33,6 +34,12 @@ public:
    * @brief Default constructor - initializes to zero vector
    */
   HOST_DEVICE Vec3() : x(0), y(0), z(0) {}
+
+  /**
+   * @brief Construct vector with all components set to the same value
+   * @param v Value for x, y, and z components
+   */
+  HOST_DEVICE Vec3(float v) : x(v), y(v), z(v) {}
 
   /**
    * @brief Construct vector from three components
@@ -129,6 +136,10 @@ public:
    */
   HOST_DEVICE Vec3 normalized() const {
     float len = length();
+    if (len == 0.0f) {
+      // Avoid division by zero — return a safe default zero vector
+      return Vec3(0.0f, 0.0f, 0.0f);
+    }
     return Vec3(x / len, y / len, z / len);
   }
 
@@ -153,21 +164,23 @@ public:
                 a.x * b.y - a.y * b.x);
   }
 
+  /**
+   * @brief Generate a random vector with each component in [min, max]
+   * @param min Minimum component value
+   * @param max Maximum component value
+   * @return Random vector
+   */
   HOST_DEVICE static Vec3 random(float min, float max) {
-    return Vec3(min + static_cast<float>(rand()) /
-                          (static_cast<double>(RAND_MAX) / (max - min)),
-                min + static_cast<float>(rand()) /
-                          (static_cast<double>(RAND_MAX) / (max - min)),
-                min + static_cast<float>(rand()) /
-                          (static_cast<double>(RAND_MAX) / (max - min)));
+    PCG32 rng;
+    return Vec3(rng.next_float() * (max - min) + min,
+                rng.next_float() * (max - min) + min,
+                rng.next_float() * (max - min) + min);
   }
 
   HOST_DEVICE static Vec3 random_unit_vector() {
-    float a = static_cast<float>(rand()) /
-              (static_cast<float>(RAND_MAX) / (2.0f * M_PI));
-    float z = static_cast<float>(rand()) /
-              (static_cast<float>(RAND_MAX) / 2.0f) -
-              1.0f;
+    PCG32 rng;
+    float a = rng.next_float() * (2.0f * M_PI);
+    float z = rng.next_float() * 2.0f - 1.0f;
     float r = std::sqrt(1.0f - z * z);
     return Vec3(r * std::cos(a), r * std::sin(a), z);
   }
@@ -197,7 +210,19 @@ public:
  * @param v Vector to multiply
  * @return Scaled vector
  */
-HOST_DEVICE inline Vec3 operator*(float t, const Vec3 &v) { return Vec3(t * v.x, t * v.y, t * v.z); }
+HOST_DEVICE inline Vec3 operator*(float t, const Vec3 &v) {
+  return Vec3(t * v.x, t * v.y, t * v.z);
+}
+
+/**
+ * @brief Reflect vector v around normal n
+ * @param v Incoming vector
+ * @param n Normal vector
+ * @return Reflected vector
+ */
+HOST_DEVICE inline Vec3 reflect(const Vec3 &v, const Vec3 &n) {
+  return v - 2.0f * Vec3::dot(v, n) * n;
+}
 
 /**
  * @brief Stream output operator for debugging

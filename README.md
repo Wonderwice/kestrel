@@ -5,34 +5,6 @@
 
 A rendering engine built in C++/CUDA.
 
-## Current Features (v0.1)
-
-- ✅ Basic ray-sphere intersection
-- ✅ Simple pinhole camera model
-- ✅ Surface normal visualization
-- ✅ PPM image output
-- ✅ Full Doxygen documentation
-- ✅ Automated CI/CD pipeline
-- ✅ GitHub Pages deployment
-
-## Project Structure
-
-```
-.
-├── .github/
-│   └── workflows/
-│       └── ci.yml           # CI/CD pipeline
-├── CMakeLists.txt           # Build configuration
-├── Doxyfile                 # Doxygen documentation config
-├── .clang-format            # Code style rules
-├── .gitignore               # Git ignore patterns
-├── main.cpp                 # Main renderer loop
-├── vec3.h                   # 3D vector math (GPU-ready)
-├── ray.h                    # Ray representation
-├── sphere.h                 # Sphere primitive with intersection
-└── camera.h                 # Camera and ray generation
-```
-
 ## Quick Start
 
 ```bash
@@ -55,23 +27,6 @@ This will generate `output.ppm` in the build directory.
 doxygen Doxyfile
 firefox docs/html/index.html
 ```
-
-The documentation includes:
-- Detailed class and function descriptions
-- Call graphs and dependency diagrams
-- Source code cross-references
-- Mathematical explanations of algorithms
-
-## CI/CD Pipeline
-
-Every push to `main` automatically:
-1. ✅ Builds on Ubuntu and macOS (Release + Debug)
-2. ✅ Runs test renders to verify correctness
-3. ✅ Generates and deploys documentation to GitHub Pages
-4. ✅ Checks code formatting and quality
-5. ✅ Uploads render artifacts
-
-View pipeline results: [GitHub Actions](https://github.com/Wonderwice/kestrel/actions)
 
 ## Viewing Output
 

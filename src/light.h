@@ -15,14 +15,23 @@
 
 class Light {
 public:
+  /**
+   * @brief Construct a light source
+   * @param position Position of the light in 3D space
+   * @param intensity Color/intensity of the light
+   */
   Light(const Vec3 &position, const Vec3 &intensity)
       : position(position), intensity(intensity) {}
 
+  /**
+   * @brief Sample direction from a point to the light source
+   * @param point Point in space from which to sample the light direction
+   * @return Normalized direction vector from point to light
+   */
   Vec3 sample_direction(const Vec3 &point) const {
     // Sample direction from point to light position
     return (position - point).normalized();
   }
-
 
   Vec3 get_intensity() const { return intensity; }
 

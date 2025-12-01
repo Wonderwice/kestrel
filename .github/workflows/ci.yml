@@ -42,7 +42,7 @@ jobs:
     - name: Test render
       run: |
         cd build
-        ./kestrel
+        ./kestrel 800 600
         ls -lh output.ppm
     
     - name: Upload render artifact

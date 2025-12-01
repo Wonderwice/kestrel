@@ -15,22 +15,22 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 
 # Source files
 set(SOURCES
-    main.cpp
+    src/kestrel.cpp
 )
 
 # Headers (for IDE)
 set(HEADERS
-    vec3.h
-    ray.h
-    sphere.h
-    camera.h
+    src/vec3.h
+    src/ray.h
+    src/sphere.h
+    src/camera.h
 )
 
 # Executable
 add_executable(kestrel ${SOURCES} ${HEADERS})
 
 # Include directories
-target_include_directories(kestrel PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(kestrel PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # Print build info
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")

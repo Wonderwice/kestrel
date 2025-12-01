@@ -57,7 +57,7 @@ public:
       if (obj.hit(ray, t_min, closest_so_far, rec)) {
         hit_anything = true;
         closest_so_far = rec.t;
-        rec.material = &obj.material;
+        rec.material = obj.material;
       }
     }
 
