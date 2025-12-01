@@ -1,12 +1,26 @@
-<map id="sphere.h" name="sphere.h">
-<area shape="rect" id="Node000001" title="Sphere primitive with ray intersection." alt="" coords="45,5,124,31"/>
-<area shape="rect" id="Node000002" href="$ray_8h.html" title="Ray representation for ray tracing." alt="" coords="26,79,79,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,32,66,67,61,65,77,30"/>
-<area shape="rect" id="Node000003" href="$vec3_8h.html" title="3D vector mathematics for CPU and GPU execution" alt="" coords="52,152,117,177"/>
-<area shape="poly" id="edge5_Node000001_Node000003" title=" " alt="" coords="89,30,94,79,91,138,86,138,89,79,84,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="60,103,76,139,72,141,56,105"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="5,225,68,251"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="79,179,54,216,50,213,75,176"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="93,225,173,251"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="95,176,120,213,115,216,90,179"/>
+<map id="include/sphere.h" name="include/sphere.h">
+<area shape="rect" id="Node000001" title="Sphere primitive with ray intersection." alt="" coords="203,5,332,31"/>
+<area shape="rect" id="Node000002" href="$material_8h_source.html" title=" " alt="" coords="102,79,230,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="253,33,195,73,192,68,250,28"/>
+<area shape="rect" id="Node000006" href="$ray_8h.html" title="Ray representation for ray tracing." alt="" coords="126,225,179,251"/>
+<area shape="poly" id="edge14_Node000001_Node000006" title=" " alt="" coords="268,31,259,65,244,105,209,167,173,216,168,213,204,164,240,103,254,63,262,30"/>
+<area shape="rect" id="Node000007" href="$vec3_8h.html" title="3D vector mathematics for CPU and GPU execution" alt="" coords="120,299,185,324"/>
+<area shape="poly" id="edge15_Node000001_Node000007" title=" " alt="" coords="271,31,271,64,267,104,250,182,236,214,214,252,197,273,179,292,175,288,193,270,209,249,231,211,244,180,262,104,266,64,265,31"/>
+<area shape="rect" id="Node000003" href="$kestrel_8h.html" title="Core structures for Kestrel ray tracer." alt="" coords="49,152,128,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="149,106,106,144,102,140,145,102"/>
+<area shape="poly" id="edge12_Node000002_Node000006" title=" " alt="" coords="168,105,158,212,152,211,162,104"/>
+<area shape="poly" id="edge13_Node000002_Node000007" title=" " alt="" coords="174,103,184,130,194,167,199,209,194,251,185,272,174,289,169,286,181,269,189,250,194,209,189,168,179,132,169,105"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="106,150,149,112,152,116,110,154"/>
+<area shape="rect" id="Node000004" href="$pcg32_8h_source.html" title=" " alt="" coords="5,372,79,397"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="89,178,50,359,45,358,84,177"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="101,176,135,213,131,217,97,179"/>
+<area shape="poly" id="edge11_Node000003_Node000007" title=" " alt="" coords="94,177,102,210,116,250,138,286,133,289,112,252,97,212,89,179"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="9,445,75,471"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="45,398,45,432,39,432,39,398"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="155,251,155,285,150,285,150,251"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="136,326,73,367,70,362,133,322"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="215,372,277,397"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="169,322,222,361,218,366,166,326"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="110,372,190,397"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="155,324,154,359,148,358,150,324"/>
 </map>

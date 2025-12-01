@@ -81,20 +81,26 @@ $(function() {
 <p>Information about a ray-geometry intersection.  
  <a href="structHitRecord.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="sphere_8h_source.html">sphere.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="kestrel_8h_source.html">kestrel.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for HitRecord:</div>
 <div class="dyncontent">
 <div class="center"><img src="structHitRecord__coll__graph.png" border="0" usemap="#aHitRecord_coll__map" alt="Collaboration graph"/></div>
 <map name="aHitRecord_coll__map" id="aHitRecord_coll__map">
-<area shape="rect" title="Information about a ray&#45;geometry intersection." alt="" coords="5,108,92,133"/>
-<area shape="rect" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution." alt="" coords="22,5,75,31"/>
-<area shape="poly" title=" " alt="" coords="51,45,51,108,46,108,46,45"/>
+<area shape="rect" title="Information about a ray&#45;geometry intersection." alt="" coords="33,108,119,133"/>
+<area shape="rect" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution." alt="" coords="5,5,59,31"/>
+<area shape="poly" title=" " alt="" coords="35,44,37,64,44,83,63,106,59,110,39,85,32,65,29,45"/>
+<area shape="rect" href="classMaterial.html" title="Material base class for ray tracing." alt="" coords="83,5,159,31"/>
+<area shape="poly" title=" " alt="" coords="113,45,84,109,79,107,108,42"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a84bd816eb5d9b83fc08258d6e9e36f49" id="r_a84bd816eb5d9b83fc08258d6e9e36f49"><td class="memItemLeft" align="right" valign="top"><a id="a84bd816eb5d9b83fc08258d6e9e36f49" name="a84bd816eb5d9b83fc08258d6e9e36f49"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>HitRecord</b> ()</td></tr>
+<tr class="memdesc:a84bd816eb5d9b83fc08258d6e9e36f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Hit Record object. <br /></td></tr>
+<tr class="separator:a84bd816eb5d9b83fc08258d6e9e36f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cd89fb5a065e6a3464f805ba1629fb1" id="r_a2cd89fb5a065e6a3464f805ba1629fb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structHitRecord.html#a2cd89fb5a065e6a3464f805ba1629fb1">set_face_normal</a> (const <a class="el" href="classRay.html">Ray</a> &amp;ray, const <a class="el" href="classVec3.html">Vec3</a> &amp;outward_normal)</td></tr>
 <tr class="memdesc:a2cd89fb5a065e6a3464f805ba1629fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the surface normal and determine which face was hit.  <br /></td></tr>
 <tr class="separator:a2cd89fb5a065e6a3464f805ba1629fb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,6 +123,10 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>t</b></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>front_face</b></td></tr>
 <tr class="memdesc:a95d5e41521e7dd017ec39d583602c745"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if ray hit the front face of the surface. <br /></td></tr>
 <tr class="separator:a95d5e41521e7dd017ec39d583602c745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18278816cc6d5d33d8bf811f74c660cf" id="r_a18278816cc6d5d33d8bf811f74c660cf"><td class="memItemLeft" align="right" valign="top"><a id="a18278816cc6d5d33d8bf811f74c660cf" name="a18278816cc6d5d33d8bf811f74c660cf"></a>
+const <a class="el" href="classMaterial.html">Material</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>material</b></td></tr>
+<tr class="memdesc:a18278816cc6d5d33d8bf811f74c660cf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMaterial.html" title="Material base class for ray tracing.">Material</a> at the hit point. <br /></td></tr>
+<tr class="separator:a18278816cc6d5d33d8bf811f74c660cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Information about a ray-geometry intersection. </p>
@@ -169,7 +179,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>front_face</b></td></
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="sphere_8h_source.html">sphere.h</a></li>
+<li>include/<a class="el" href="kestrel_8h_source.html">kestrel.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

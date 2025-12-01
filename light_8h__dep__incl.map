@@ -1,5 +1,5 @@
-<map id="light.h" name="light.h">
-<area shape="rect" id="Node000001" title="Light source representation." alt="" coords="15,5,78,31"/>
-<area shape="rect" id="Node000002" href="$main_8cpp.html" title="Main renderer entry point." alt="" coords="5,79,88,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,44,49,79,44,79,44,44"/>
+<map id="include/light.h" name="include/light.h">
+<area shape="rect" id="Node000001" title="Light source representation." alt="" coords="9,5,124,31"/>
+<area shape="rect" id="Node000002" href="$scene_8h.html" title="Scene representation with objects and camera." alt="" coords="5,79,128,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,44,69,79,64,79,64,44"/>
 </map>

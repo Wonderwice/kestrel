@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['z_0',['z',['../classVec3.html#a64f3f00cd2dd9076999eeb2f05210388',1,'Vec3']]]
+  ['radius_0',['radius',['../classSphere.html#ae6f42f0da6679a2f0b4a22681ccccf38',1,'Sphere']]]
 ];

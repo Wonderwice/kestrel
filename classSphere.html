@@ -87,21 +87,19 @@ Collaboration diagram for Sphere:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSphere__coll__graph.png" border="0" usemap="#aSphere_coll__map" alt="Collaboration graph"/></div>
 <map name="aSphere_coll__map" id="aSphere_coll__map">
-<area shape="rect" title="Sphere primitive defined by center and radius." alt="" coords="5,93,72,119"/>
-<area shape="rect" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution." alt="" coords="12,5,65,31"/>
-<area shape="poly" title=" " alt="" coords="41,45,41,93,36,93,36,45"/>
+<area shape="rect" title="Sphere primitive defined by center and radius." alt="" coords="43,93,109,119"/>
+<area shape="rect" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution." alt="" coords="5,5,59,31"/>
+<area shape="poly" title=" " alt="" coords="40,44,49,68,66,92,62,95,44,71,35,45"/>
+<area shape="rect" href="classMaterial.html" title="Material base class for ray tracing." alt="" coords="83,5,159,31"/>
+<area shape="poly" title=" " alt="" coords="111,44,85,94,80,92,106,42"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a890a63ff583cb88e7ec4e840b4ef5eb9" id="r_a890a63ff583cb88e7ec4e840b4ef5eb9"><td class="memItemLeft" align="right" valign="top"><a id="a890a63ff583cb88e7ec4e840b4ef5eb9" name="a890a63ff583cb88e7ec4e840b4ef5eb9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Sphere</b> ()</td></tr>
-<tr class="memdesc:a890a63ff583cb88e7ec4e840b4ef5eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
-<tr class="separator:a890a63ff583cb88e7ec4e840b4ef5eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a050fe66a38f3dab3cfb9ba7cbb8630eb" id="r_a050fe66a38f3dab3cfb9ba7cbb8630eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a050fe66a38f3dab3cfb9ba7cbb8630eb">Sphere</a> (<a class="el" href="vec3_8h.html#aeef95635e817fbf8cf22cd14c8d88fc5">Point3</a> <a class="el" href="classSphere.html#a4430495caa1f3f010937a8fb67d042c5">center</a>, float <a class="el" href="classSphere.html#ae6f42f0da6679a2f0b4a22681ccccf38">radius</a>)</td></tr>
-<tr class="memdesc:a050fe66a38f3dab3cfb9ba7cbb8630eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct sphere from center and radius.  <br /></td></tr>
-<tr class="separator:a050fe66a38f3dab3cfb9ba7cbb8630eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a972bfd106af22b3458acad9346307960" id="r_a972bfd106af22b3458acad9346307960"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a972bfd106af22b3458acad9346307960">Sphere</a> (<a class="el" href="vec3_8h.html#aeef95635e817fbf8cf22cd14c8d88fc5">Point3</a> <a class="el" href="classSphere.html#a4430495caa1f3f010937a8fb67d042c5">center</a>, float <a class="el" href="classSphere.html#ae6f42f0da6679a2f0b4a22681ccccf38">radius</a>, const <a class="el" href="classMaterial.html">Material</a> *<a class="el" href="classSphere.html#aceefb8671eb83c5a2e711cce1be04cd0">material</a>)</td></tr>
+<tr class="memdesc:a972bfd106af22b3458acad9346307960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct sphere from center and radius.  <br /></td></tr>
+<tr class="separator:a972bfd106af22b3458acad9346307960"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21c62239061e20a5d0c9d2515d5669e6" id="r_a21c62239061e20a5d0c9d2515d5669e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphere.html#a21c62239061e20a5d0c9d2515d5669e6">hit</a> (const <a class="el" href="classRay.html">Ray</a> &amp;ray, float t_min, float t_max, <a class="el" href="structHitRecord.html">HitRecord</a> &amp;rec) const</td></tr>
 <tr class="memdesc:a21c62239061e20a5d0c9d2515d5669e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test ray-sphere intersection.  <br /></td></tr>
 <tr class="separator:a21c62239061e20a5d0c9d2515d5669e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,13 +114,17 @@ Public Attributes</h2></td></tr>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>radius</b></td></tr>
 <tr class="memdesc:ae6f42f0da6679a2f0b4a22681ccccf38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Radius of the sphere. <br /></td></tr>
 <tr class="separator:ae6f42f0da6679a2f0b4a22681ccccf38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceefb8671eb83c5a2e711cce1be04cd0" id="r_aceefb8671eb83c5a2e711cce1be04cd0"><td class="memItemLeft" align="right" valign="top"><a id="aceefb8671eb83c5a2e711cce1be04cd0" name="aceefb8671eb83c5a2e711cce1be04cd0"></a>
+const <a class="el" href="classMaterial.html">Material</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>material</b></td></tr>
+<tr class="memdesc:aceefb8671eb83c5a2e711cce1be04cd0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classMaterial.html" title="Material base class for ray tracing.">Material</a> of the sphere. <br /></td></tr>
+<tr class="separator:aceefb8671eb83c5a2e711cce1be04cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classSphere.html" title="Sphere primitive defined by center and radius.">Sphere</a> primitive defined by center and radius. </p>
 <p>Implements analytical ray-sphere intersection using the quadratic formula. The sphere is defined implicitly as all points p where |p - center|² = radius². </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a050fe66a38f3dab3cfb9ba7cbb8630eb" name="a050fe66a38f3dab3cfb9ba7cbb8630eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a050fe66a38f3dab3cfb9ba7cbb8630eb">&#9670;&#160;</a></span>Sphere()</h2>
+<a id="a972bfd106af22b3458acad9346307960" name="a972bfd106af22b3458acad9346307960"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a972bfd106af22b3458acad9346307960">&#9670;&#160;</a></span>Sphere()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -140,7 +142,13 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>radius</b></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>radius</em>&#160;</td>
+          <td class="paramname"><em>radius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classMaterial.html">Material</a> *&#160;</td>
+          <td class="paramname"><em>material</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -160,6 +168,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>radius</b></td></tr>
   <table class="params">
     <tr><td class="paramname">center</td><td>Center point of the sphere </td></tr>
     <tr><td class="paramname">radius</td><td>Radius of the sphere (must be positive) </td></tr>
+    <tr><td class="paramname">material</td><td><a class="el" href="classMaterial.html" title="Material base class for ray tracing.">Material</a> of the sphere </td></tr>
   </table>
   </dd>
 </dl>
@@ -172,9 +181,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>radius</b></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Sphere::hit </td>
@@ -206,11 +212,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>radius</b></td></tr>
           <td></td><td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Test ray-sphere intersection. </p>
@@ -234,7 +235,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>radius</b></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="sphere_8h_source.html">sphere.h</a></li>
+<li>include/<a class="el" href="sphere_8h_source.html">sphere.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -101,6 +101,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7cda102f1007319d44f83462416d091d" id="r_a7cda102f1007319d44f83462416d091d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a7cda102f1007319d44f83462416d091d">add_object</a> (const <a class="el" href="classSphere.html">Sphere</a> &amp;obj)</td></tr>
 <tr class="memdesc:a7cda102f1007319d44f83462416d091d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an object to the scene.  <br /></td></tr>
 <tr class="separator:a7cda102f1007319d44f83462416d091d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad7bb09d0ac087fe5bc04b2f4816e995" id="r_aad7bb09d0ac087fe5bc04b2f4816e995"><td class="memItemLeft" align="right" valign="top"><a id="aad7bb09d0ac087fe5bc04b2f4816e995" name="aad7bb09d0ac087fe5bc04b2f4816e995"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_light</b> (const <a class="el" href="classLight.html">Light</a> &amp;light)</td></tr>
+<tr class="separator:aad7bb09d0ac087fe5bc04b2f4816e995"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b83fe5243f220601f4c1ba0e785b740" id="r_a6b83fe5243f220601f4c1ba0e785b740"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a6b83fe5243f220601f4c1ba0e785b740">hit</a> (const <a class="el" href="classRay.html">Ray</a> &amp;ray, float t_min, float t_max, <a class="el" href="structHitRecord.html">HitRecord</a> &amp;rec) const</td></tr>
 <tr class="memdesc:a6b83fe5243f220601f4c1ba0e785b740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test ray against all objects in the scene for intersection.  <br /></td></tr>
 <tr class="separator:a6b83fe5243f220601f4c1ba0e785b740"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,6 +118,10 @@ Public Attributes</h2></td></tr>
 std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>objects</b></td></tr>
 <tr class="memdesc:ac099a9060b6e8dd927cf0ae1dcc9e089"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of objects in the scene. <br /></td></tr>
 <tr class="separator:ac099a9060b6e8dd927cf0ae1dcc9e089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3625e4ac3c6e47156edd23e2421e828" id="r_ab3625e4ac3c6e47156edd23e2421e828"><td class="memItemLeft" align="right" valign="top"><a id="ab3625e4ac3c6e47156edd23e2421e828" name="ab3625e4ac3c6e47156edd23e2421e828"></a>
+std::vector&lt; <a class="el" href="classLight.html">Light</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>lights</b></td></tr>
+<tr class="memdesc:ab3625e4ac3c6e47156edd23e2421e828"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of lights in the scene. <br /></td></tr>
+<tr class="separator:ab3625e4ac3c6e47156edd23e2421e828"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a 3D scene with a camera and objects. </p>
@@ -193,9 +200,6 @@ std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Scene::hit </td>
@@ -227,11 +231,6 @@ std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td>
           <td></td><td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Test ray against all objects in the scene for intersection. </p>
@@ -250,7 +249,7 @@ std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="scene_8h_source.html">scene.h</a></li>
+<li>include/<a class="el" href="scene_8h_source.html">scene.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

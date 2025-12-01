@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kestrel: lambertian.h Source File</title>
+<title>Kestrel: include/bsdfs/lambertian.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -52,7 +52,6 @@ $(function() {
 $(document).ready(function() { init_codefold(0); });
 /* @license-end */
 </script>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -74,6 +73,11 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_a1f8b32a22102d1fd37cd057532d3b52.html">bsdfs</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">lambertian.h</div></div>
 </div><!--header-->
@@ -82,42 +86,38 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef LAMBERTIAN_H</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define LAMBERTIAN_H</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="camera_8h.html">camera.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="kestrel_8h.html">kestrel.h</a>&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="ray_8h.html">ray.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="sphere_8h.html">sphere.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="vec3_8h.html">vec3.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="};">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classLambertian.html">   24</a></span><span class="keyword">class </span><a class="code hl_class" href="classLambertian.html">Lambertian</a> {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classLambertian.html#afebd72577316c94551d773309a0cb35a">   34</a></span>  HOST_DEVICE <a class="code hl_function" href="classLambertian.html#afebd72577316c94551d773309a0cb35a">Lambertian</a>(<a class="code hl_class" href="classVec3.html">Color</a> albedo) : albedo(albedo) {}</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  HOST_DEVICE <span class="keywordtype">bool</span> scatter(<span class="keyword">const</span> <a class="code hl_class" href="classRay.html">Ray</a> &amp;incoming, <span class="keyword">const</span> <a class="code hl_struct" href="structHitRecord.html">HitRecord</a> &amp;rec,</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                           <a class="code hl_class" href="classVec3.html">Color</a> &amp;attenuation, <a class="code hl_class" href="classRay.html">Ray</a> &amp;scattered)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_class" href="classVec3.html">Vec3</a> scatter_direction = rec.<a class="code hl_variable" href="structHitRecord.html#a59eac6b0a45071147d4c6bd18bc53684">normal</a> + Vec3::random_unit_vector();</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    scattered = <a class="code hl_class" href="classRay.html">Ray</a>(rec.<a class="code hl_variable" href="structHitRecord.html#aae08a8b5e81208800310643101767b58">point</a>, scatter_direction);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    attenuation = albedo;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  HOST_DEVICE <a class="code hl_class" href="classVec3.html">Color</a> get_color()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> albedo; }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <a class="code hl_class" href="classVec3.html">Color</a> albedo;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
-</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="vec3_8h.html">vec3.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classLambertian.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="classLambertian.html">Lambertian</a> : <span class="keyword">public</span> <a class="code hl_class" href="classMaterial.html">Material</a> {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classLambertian.html#a2781c9bb81221aece2e998f4b301d014">   28</a></span>  HOST_DEVICE <a class="code hl_function" href="classLambertian.html#a2781c9bb81221aece2e998f4b301d014">Lambertian</a>() {}</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classLambertian.html#a1f806c82aab0827d892c80d4ba9c660f">   37</a></span>  HOST_DEVICE <a class="code hl_function" href="classLambertian.html#a1f806c82aab0827d892c80d4ba9c660f">Lambertian</a>(<a class="code hl_class" href="classVec3.html">Color</a> albedo) : albedo(albedo), <a class="code hl_class" href="classMaterial.html">Material</a>(0.0f) {}</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classLambertian.html#a654eadd61872f1e4f125a430629592a5">   47</a></span>  HOST_DEVICE <span class="keywordtype">bool</span> <a class="code hl_function" href="classLambertian.html#a654eadd61872f1e4f125a430629592a5">scatter</a>(<span class="keyword">const</span> <a class="code hl_class" href="classRay.html">Ray</a> &amp;incoming, <span class="keyword">const</span> <a class="code hl_struct" href="structHitRecord.html">HitRecord</a> &amp;rec,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                           <a class="code hl_class" href="classVec3.html">Color</a> &amp;attenuation, <a class="code hl_class" href="classRay.html">Ray</a> &amp;scattered) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="acamera_8h_html"><div class="ttname"><a href="camera_8h.html">camera.h</a></div><div class="ttdoc">Pinhole camera model for ray generation.</div></div>
-<div class="ttc" id="aclassLambertian_html"><div class="ttname"><a href="classLambertian.html">Lambertian</a></div><div class="ttdoc">Implements Lambertian diffuse reflection.</div><div class="ttdef"><b>Definition</b> lambertian.h:24</div></div>
-<div class="ttc" id="aclassLambertian_html_afebd72577316c94551d773309a0cb35a"><div class="ttname"><a href="classLambertian.html#afebd72577316c94551d773309a0cb35a">Lambertian::Lambertian</a></div><div class="ttdeci">Lambertian(Color albedo)</div><div class="ttdoc">Generate a random diffuse reflection direction.</div><div class="ttdef"><b>Definition</b> lambertian.h:34</div></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classLambertian.html#acdad0066217e17db80f8ca46849c7eaa">   54</a></span>  HOST_DEVICE <a class="code hl_class" href="classVec3.html">Color</a> <a class="code hl_function" href="classLambertian.html#acdad0066217e17db80f8ca46849c7eaa">get_color</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <a class="code hl_class" href="classVec3.html">Color</a> albedo;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>};</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassLambertian_html"><div class="ttname"><a href="classLambertian.html">Lambertian</a></div><div class="ttdoc">Implements Lambertian diffuse reflection.</div><div class="ttdef"><b>Definition</b> lambertian.h:23</div></div>
+<div class="ttc" id="aclassLambertian_html_a1f806c82aab0827d892c80d4ba9c660f"><div class="ttname"><a href="classLambertian.html#a1f806c82aab0827d892c80d4ba9c660f">Lambertian::Lambertian</a></div><div class="ttdeci">HOST_DEVICE Lambertian(Color albedo)</div><div class="ttdoc">Generate a random diffuse reflection direction.</div><div class="ttdef"><b>Definition</b> lambertian.h:37</div></div>
+<div class="ttc" id="aclassLambertian_html_a2781c9bb81221aece2e998f4b301d014"><div class="ttname"><a href="classLambertian.html#a2781c9bb81221aece2e998f4b301d014">Lambertian::Lambertian</a></div><div class="ttdeci">HOST_DEVICE Lambertian()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition</b> lambertian.h:28</div></div>
+<div class="ttc" id="aclassLambertian_html_a654eadd61872f1e4f125a430629592a5"><div class="ttname"><a href="classLambertian.html#a654eadd61872f1e4f125a430629592a5">Lambertian::scatter</a></div><div class="ttdeci">HOST_DEVICE bool scatter(const Ray &amp;incoming, const HitRecord &amp;rec, Color &amp;attenuation, Ray &amp;scattered) const</div><div class="ttdoc">Generate a diffuse scatter direction.</div></div>
+<div class="ttc" id="aclassLambertian_html_acdad0066217e17db80f8ca46849c7eaa"><div class="ttname"><a href="classLambertian.html#acdad0066217e17db80f8ca46849c7eaa">Lambertian::get_color</a></div><div class="ttdeci">HOST_DEVICE Color get_color() const</div><div class="ttdoc">Get the color of the Lambertian material.</div></div>
+<div class="ttc" id="aclassMaterial_html"><div class="ttname"><a href="classMaterial.html">Material</a></div><div class="ttdoc">Material base class for ray tracing.</div><div class="ttdef"><b>Definition</b> material.h:20</div></div>
 <div class="ttc" id="aclassRay_html"><div class="ttname"><a href="classRay.html">Ray</a></div><div class="ttdoc">Represents a ray with origin and direction.</div><div class="ttdef"><b>Definition</b> ray.h:20</div></div>
-<div class="ttc" id="aclassVec3_html"><div class="ttname"><a href="classVec3.html">Vec3</a></div><div class="ttdoc">A 3D vector class supporting both CPU and GPU execution.</div><div class="ttdef"><b>Definition</b> vec3.h:28</div></div>
+<div class="ttc" id="aclassVec3_html"><div class="ttname"><a href="classVec3.html">Vec3</a></div><div class="ttdoc">A 3D vector class supporting both CPU and GPU execution.</div><div class="ttdef"><b>Definition</b> vec3.h:29</div></div>
+<div class="ttc" id="akestrel_8h_html"><div class="ttname"><a href="kestrel_8h.html">kestrel.h</a></div><div class="ttdoc">Core structures for Kestrel ray tracer.</div></div>
 <div class="ttc" id="aray_8h_html"><div class="ttname"><a href="ray_8h.html">ray.h</a></div><div class="ttdoc">Ray representation for ray tracing.</div></div>
-<div class="ttc" id="asphere_8h_html"><div class="ttname"><a href="sphere_8h.html">sphere.h</a></div><div class="ttdoc">Sphere primitive with ray intersection.</div></div>
-<div class="ttc" id="astructHitRecord_html"><div class="ttname"><a href="structHitRecord.html">HitRecord</a></div><div class="ttdoc">Information about a ray-geometry intersection.</div><div class="ttdef"><b>Definition</b> sphere.h:21</div></div>
-<div class="ttc" id="astructHitRecord_html_a59eac6b0a45071147d4c6bd18bc53684"><div class="ttname"><a href="structHitRecord.html#a59eac6b0a45071147d4c6bd18bc53684">HitRecord::normal</a></div><div class="ttdeci">Vec3 normal</div><div class="ttdoc">Surface normal at intersection (always points outward from surface)</div><div class="ttdef"><b>Definition</b> sphere.h:23</div></div>
-<div class="ttc" id="astructHitRecord_html_aae08a8b5e81208800310643101767b58"><div class="ttname"><a href="structHitRecord.html#aae08a8b5e81208800310643101767b58">HitRecord::point</a></div><div class="ttdeci">Point3 point</div><div class="ttdoc">3D point of intersection</div><div class="ttdef"><b>Definition</b> sphere.h:22</div></div>
+<div class="ttc" id="astructHitRecord_html"><div class="ttname"><a href="structHitRecord.html">HitRecord</a></div><div class="ttdoc">Information about a ray-geometry intersection.</div><div class="ttdef"><b>Definition</b> kestrel.h:25</div></div>
 <div class="ttc" id="avec3_8h_html"><div class="ttname"><a href="vec3_8h.html">vec3.h</a></div><div class="ttdoc">3D vector mathematics for CPU and GPU execution</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

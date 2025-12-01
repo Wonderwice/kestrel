@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ray_0',['Ray',['../classRay.html',1,'']]]
+  ['material_0',['Material',['../classMaterial.html',1,'']]]
 ];

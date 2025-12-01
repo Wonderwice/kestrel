@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['normal_0',['normal',['../structHitRecord.html#a59eac6b0a45071147d4c6bd18bc53684',1,'HitRecord']]],
-  ['normalized_1',['normalized',['../classVec3.html#ae9a32a15ee612fd8a5aeb6d32ec5f666',1,'Vec3']]]
+  ['material_0',['material',['../classMaterial.html',1,'Material'],['../classMaterial.html#ab9ecee109773f9a6584fc11ec66eaa74',1,'Material::Material()'],['../structHitRecord.html#a18278816cc6d5d33d8bf811f74c660cf',1,'HitRecord::material'],['../classSphere.html#aceefb8671eb83c5a2e711cce1be04cd0',1,'Sphere::material']]]
 ];

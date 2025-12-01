@@ -1,9 +1,13 @@
-<map id="ray.h" name="ray.h">
-<area shape="rect" id="Node000001" title="Ray representation for ray tracing." alt="" coords="58,5,111,31"/>
-<area shape="rect" id="Node000002" href="$vec3_8h.html" title="3D vector mathematics for CPU and GPU execution" alt="" coords="52,79,117,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,31,87,65,82,65,82,31"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,152,68,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="79,106,54,142,50,139,75,103"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="93,152,173,177"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="95,103,120,139,115,142,90,106"/>
+<map id="include/ray.h" name="include/ray.h">
+<area shape="rect" id="Node000001" title="Ray representation for ray tracing." alt="" coords="82,5,186,31"/>
+<area shape="rect" id="Node000002" href="$vec3_8h.html" title="3D vector mathematics for CPU and GPU execution" alt="" coords="101,79,167,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,31,137,65,131,65,131,31"/>
+<area shape="rect" id="Node000003" href="$pcg32_8h_source.html" title=" " alt="" coords="5,152,79,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,106,69,146,66,141,118,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="103,152,165,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="137,104,137,138,131,138,131,104"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="190,152,270,177"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="151,102,205,141,202,146,148,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="9,225,75,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="45,178,45,212,39,212,39,178"/>
 </map>

@@ -1,0 +1,15 @@
+<map id="include/kestrel.h" name="include/kestrel.h">
+<area shape="rect" id="Node000001" title="Core structures for Kestrel ray tracer." alt="" coords="193,5,322,31"/>
+<area shape="rect" id="Node000002" href="$conductor_8h.html" title="Conductor reflection model for ray tracing." alt="" coords="5,152,192,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="180,33,98,53,65,66,45,80,40,89,40,98,49,117,65,135,83,150,80,154,61,139,44,120,35,99,35,88,41,77,62,61,96,48,179,28"/>
+<area shape="rect" id="Node000003" href="$lambertian_8h.html" title="Lambertian diffuse reflection model for ray tracing." alt="" coords="55,79,249,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="230,41,171,81,168,76,227,36"/>
+<area shape="rect" id="Node000004" href="$material_8h_source.html" title=" " alt="" coords="273,79,452,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="280,37,340,76,337,81,277,41"/>
+<area shape="poly" id="edge5_Node000004_Node000001" title=" " alt="" coords="340,72,280,33,283,28,343,68"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="308,110,142,154,141,149,306,105"/>
+<area shape="rect" id="Node000005" href="$sphere_8h.html" title="Sphere primitive with ray intersection." alt="" coords="298,152,427,177"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="365,118,365,152,360,152,360,118"/>
+<area shape="rect" id="Node000006" href="$scene_8h.html" title="Scene representation with objects and camera." alt="" coords="301,225,424,251"/>
+<area shape="poly" id="edge7_Node000005_Node000006" title=" " alt="" coords="365,191,365,225,360,225,360,191"/>
+</map>
