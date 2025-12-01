@@ -20,7 +20,9 @@
 #include "vec3.h"
 #include <fstream>
 #include <iostream>
+#include <thread>
 #include <vector>
+#include <atomic>
 
 /**
  * @brief Determine pixel color by tracing a ray through the scene
@@ -150,12 +152,24 @@ int main(int argc, char **argv) {
   const int samples_per_pixel = 10;
 
   int image_height = static_cast<int>(image_width / aspect_ratio);
-  if(argc == 2) {
+  if (argc >= 2) {
     image_width = std::stoi(argv[1]);
     image_height = static_cast<int>(image_width / aspect_ratio);
-  } else if (argc == 3) {
+  } else if (argc >= 3) {
     image_width = std::stoi(argv[1]);
     image_height = std::stoi(argv[2]);
+  }
+
+  int num_threads = -1;
+  if(argc >=4){
+      num_threads = std::max((int)std::thread::hardware_concurrency(), std::stoi(argv[3]));
+  } else {
+      num_threads = std::thread::hardware_concurrency();
+  }
+
+  if(argc >=5){
+      std::cout << "Usage: " << argv[0] << " [image_width] [image_height]\n";
+      return 1;
   }
 
   // Allocate pixel buffer
@@ -212,27 +226,41 @@ int main(int argc, char **argv) {
   std::cout << "Rendering " << image_width << "x" << image_height
             << " image...\n";
 
-  for (int j = 0; j < image_height; ++j) {
-    // Progress indicator
-    if (j % 50 == 0) {
-      std::cout << "Scanline " << j << "/" << image_height << "\n";
-    }
+  // Parallelize with std::thread
+  std::vector<std::thread> threads;
+  std::atomic<int> next_row(0);
 
-    for (int i = 0; i < image_width; ++i) {
-      for (int s = 0; s < samples_per_pixel; ++s) {
-        // Anti-aliasing: random offset within pixel
-        float u = (i + rng.next_float()) / (image_width - 1);
-        float v = (j + rng.next_float()) / (image_height - 1);
+  auto render_worker = [&](int thread_id) {
+    PCG32 thread_rng(rng.next() + thread_id); // Per-thread RNG
+    while (true) {
+      int j = next_row.fetch_add(1);
+      if (j >= image_height)
+        break;
 
-        // Generate ray through this pixel
-        Ray ray = camera.get_ray(u, v);
-        Color sample_color = ray_color(ray, scene);
-        pixels[j * image_width + i] += sample_color;
+      if (j % 50 == 0 && thread_id == 0) {
+        std::cout << "Scanline " << j << "/" << image_height << "\n";
       }
-      // Average samples and store final pixel color
-      pixels[j * image_width + i] *=
-          1.0f / static_cast<float>(samples_per_pixel);
+
+      for (int i = 0; i < image_width; ++i) {
+        Color pixel_color(0, 0, 0);
+        for (int s = 0; s < samples_per_pixel; ++s) {
+          float u = (i + thread_rng.next_float()) / (image_width - 1);
+          float v = (j + thread_rng.next_float()) / (image_height - 1);
+          Ray ray = camera.get_ray(u, v);
+          pixel_color += ray_color(ray, scene);
+        }
+        pixel_color *= 1.0f / static_cast<float>(samples_per_pixel);
+        pixels[j * image_width + i] = pixel_color;
+      }
     }
+  };
+
+  // Launch threads
+  for (int t = 0; t < num_threads; ++t) {
+    threads.emplace_back(render_worker, t);
+  }
+  for (auto &th : threads) {
+    th.join();
   }
 
   // Write output file
