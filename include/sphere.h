@@ -11,6 +11,7 @@
 #include "bsdfs/material.h"
 #include "ray.h"
 #include "vec3.h"
+#include "shape.h"
 
 /**
  * @class Sphere
@@ -20,11 +21,10 @@
  * The sphere is defined implicitly as all points p where |p - center|² =
  * radius².
  */
-class Sphere {
+class Sphere : public Shape{
 public:
   Point3 center;            ///< Center of the sphere in world space
   float radius;             ///< Radius of the sphere
-  const Material *material; ///< Material of the sphere
 
   /**
    * @brief Construct sphere from center and radius
@@ -33,7 +33,7 @@ public:
    * @param material Material of the sphere
    */
   HOST_DEVICE Sphere(Point3 center, float radius, const Material *material)
-      : center(center), radius(radius), material(material) {}
+      : center(center), radius(radius), Shape(material) {}
 
   /**
    * @brief Test ray-sphere intersection

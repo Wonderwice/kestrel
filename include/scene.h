@@ -10,7 +10,7 @@
 
 #include "camera.h"
 #include "light.h"
-#include "sphere.h"
+#include "shape.h"
 #include <vector>
 
 /**
@@ -19,7 +19,7 @@
 class Scene {
 public:
   Camera camera;               ///< Camera used for rendering
-  std::vector<Sphere> objects; ///< List of objects in the scene
+  std::vector<const Shape*> objects; ///< List of objects in the scene
   std::vector<Light> lights;   ///< List of lights in the scene
 
   /**
@@ -30,9 +30,9 @@ public:
 
   /**
    * @brief Add an object to the scene
-   * @param obj Sphere object to add
+   * @param obj Shape objeS &objct to add
    */
-  HOST_DEVICE void add_object(const Sphere &obj) { objects.push_back(obj); }
+  HOST_DEVICE void add_object(const Shape *obj) { objects.push_back(obj); }
 
   HOST_DEVICE void add_light(const Light &light) { lights.push_back(light); }
 

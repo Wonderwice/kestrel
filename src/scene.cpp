@@ -5,10 +5,10 @@ HOST_DEVICE bool Scene::hit(const Ray &ray, float t_min, float t_max, HitRecord 
   float closest_so_far = t_max;
 
   for (const auto &obj : objects) {
-    if (obj.hit(ray, t_min, closest_so_far, rec)) {
+    if (obj->hit(ray, t_min, closest_so_far, rec)) {
       hit_anything = true;
       closest_so_far = rec.t;
-      rec.material = obj.material;
+      rec.material = obj->material;
     }
   }
 

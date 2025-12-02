@@ -25,6 +25,7 @@ set(SOURCES
     src/ray.cpp
     src/scene.cpp
     src/sphere.cpp
+    src/triangle.cpp
 )
 
 # Headers

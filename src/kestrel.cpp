@@ -17,6 +17,7 @@
 #include "ray.h"
 #include "scene.h"
 #include "sphere.h"
+#include "triangle.h"
 #include "vec3.h"
 #include <atomic>
 #include <fstream>
@@ -266,15 +267,15 @@ int main(int argc, char **argv) {
   Light light4(Vec3(0, 0, 90), Vec3(10000, 10000, 10000));
 
   Scene scene(camera);
-  scene.add_object(sphere1);
-  scene.add_object(sphere2);
-  scene.add_object(sphere3);
-  scene.add_object(sphere4);
-  scene.add_object(sphere5);
-  scene.add_object(sphere6);
-  scene.add_object(sphere7);
-  scene.add_object(sphere8);
-  scene.add_object(sphere9);
+  scene.add_object(&sphere1);
+  scene.add_object(&sphere2);
+  scene.add_object(&sphere3);
+  scene.add_object(&sphere4);
+  scene.add_object(&sphere5);
+  scene.add_object(&sphere6);
+  scene.add_object(&sphere7);
+  scene.add_object(&sphere8);
+  scene.add_object(&sphere9);
   scene.add_light(light2);
   scene.add_light(light3);
   scene.add_light(light4);
