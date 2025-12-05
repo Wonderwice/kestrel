@@ -1,5 +1,5 @@
 /**
- * @file Material.h
+ * @file material.h
  * @brief Material interface for ray tracing
  * @author Alexei Czornyj
  * @date 2025
@@ -21,6 +21,7 @@ class Material {
 public:
   /**
    * @brief Default constructor
+   * @param reflectivity Reflection for mirror materials
    */
   HOST_DEVICE Material(float reflectivity = 0.0f)
       : reflectivity(reflectivity) {}
@@ -43,7 +44,7 @@ public:
    */
   HOST_DEVICE virtual Color get_color() const = 0;
 
-  float reflectivity;
+  float reflectivity; ///< Reflection for mirror materials
 };
 
 #endif

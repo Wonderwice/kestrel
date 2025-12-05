@@ -30,10 +30,14 @@ public:
 
   /**
    * @brief Add an object to the scene
-   * @param obj Shape objeS &objct to add
+   * @param obj Shape to add
    */
   HOST_DEVICE void add_object(const Shape *obj) { objects.push_back(obj); }
 
+   /**
+   * @brief Add a light to the scene
+   * @param light Light to add
+   */
   HOST_DEVICE void add_light(const Light &light) { lights.push_back(light); }
 
   /**

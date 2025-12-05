@@ -15,6 +15,10 @@
 
 class Shape {
 public:
+  /**
+   * @brief Constructor of the abstract Shape class
+   * @param material Material applied on the shape
+   */
   Shape(const Material *material) : material(material) {}
   /**
    * @brief Virtual destructor

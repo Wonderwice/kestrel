@@ -27,12 +27,8 @@ public:
    */
   HOST_DEVICE Lambertian() {}
   /**
-   * @brief Generate a random diffuse reflection direction
-   * @param normal Surface normal at the hit point
-   * @return Random direction over hemisphere oriented by normal
-   *
-   * Uses cosine-weighted hemisphere sampling to favor directions
-   * closer to the normal, simulating Lambertian reflection.
+   * @brief Lambertian constructor
+   * @param albedo Color of the material
    */
   HOST_DEVICE Lambertian(Color albedo) : albedo(albedo), Material(0.0f) {}
 

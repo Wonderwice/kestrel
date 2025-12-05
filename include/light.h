@@ -13,6 +13,10 @@
 
 #include "vec3.h"
 
+/**
+ * @class Material
+ * @brief Point light representation
+ */
 class Light {
 public:
   /**
@@ -30,6 +34,9 @@ public:
    */
   Vec3 sample_direction(const Vec3 &point) const;
 
+  /**
+   * @return RGB value of the light intensity
+   */
   Vec3 get_intensity() const;
 
   Vec3 position;  ///< Position of the light source

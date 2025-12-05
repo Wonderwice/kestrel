@@ -15,6 +15,12 @@
 
 class PlyMesh : public Shape {
 public:
+
+  /**
+   * @brief Plymesh constructor
+   * @param filepath Path of the .ply file
+   * @param material Material applied to the shape
+   */
   PlyMesh(std::string filepath, const Material *material);
 
   /**

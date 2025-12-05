@@ -13,6 +13,7 @@
 #include <iostream>
 
 #ifdef __CUDACC__
+
 #define HOST_DEVICE __host__ __device__
 #else
 #define HOST_DEVICE
@@ -132,17 +133,34 @@ public:
   HOST_DEVICE static Vec3 cross(const Vec3 &a, const Vec3 &b);
 
   /**
-   * @brief Generate a random vector with each component in [min, max]
-   * @param min Minimum component value
-   * @param max Maximum component value
-   * @return Random vector
+   * @brief Generate a random vector with each component in the range [min,
+   * max].
+   * @param min The minimum value that any component of the vector can take.
+   * @param max The maximum value that any component of the vector can take.
+   * @return A Vec3 object representing the random vector where each component
+   *         is in the range [min, max].
    */
   HOST_DEVICE static Vec3 random(float min, float max);
 
+  /**
+   * @brief Generate a random unit vector.
+   * @return A Vec3 object representing a random unit vector.
+   */
   HOST_DEVICE static Vec3 random_unit_vector();
 
+  /**
+   * @brief Generate a random vector within the unit sphere.
+   * @return A Vec3 object representing a random vector inside the unit sphere.
+   */
   HOST_DEVICE static Vec3 random_in_unit_sphere();
 
+  /**
+   * @brief Generate a random vector on the hemisphere defined by a normal.
+   * @param normal A Vec3 object representing the normal vector that defines the
+   * hemisphere.
+   * @return A Vec3 object representing a random vector on the hemisphere
+   * defined by the normal.
+   */
   HOST_DEVICE static Vec3 random_on_hemisphere(const Vec3 &normal);
 };
 
