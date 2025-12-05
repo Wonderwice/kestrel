@@ -26,6 +26,7 @@ set(SOURCES
     src/scene.cpp
     src/sphere.cpp
     src/triangle.cpp
+    src/plymesh.cpp
 )
 
 # Headers
@@ -38,7 +39,11 @@ set(HEADERS
     include/scene.h
     include/pcg32.h
     include/kestrel.h
+    include/triangle.h
+    include/plymesh.h
 )
+
+file(COPY ${CMAKE_SOURCE_DIR}/data/ DESTINATION ${CMAKE_BINARY_DIR}/data)
 
 # Executable
 add_executable(kestrel ${SOURCES} ${HEADERS})

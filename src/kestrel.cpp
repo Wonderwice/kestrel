@@ -14,6 +14,7 @@
 #include "bsdfs/lambertian.h"
 #include "camera.h"
 #include "light.h"
+#include "plymesh.h"
 #include "ray.h"
 #include "scene.h"
 #include "sphere.h"
@@ -209,7 +210,7 @@ int main(int argc, char **argv) {
   // Take width and height from command line arguments if provided
   int image_width = 1920;
   const float aspect_ratio = 16.0f / 9.0f;
-  const int samples_per_pixel = 10;
+  const int samples_per_pixel = 5;
 
   int image_height = static_cast<int>(image_width / aspect_ratio);
   if (argc >= 2) {
@@ -237,7 +238,7 @@ int main(int argc, char **argv) {
   std::vector<Color> pixels(image_width * image_height);
 
   // Camera setup: positioned at origin, looking down -Z axis
-  Camera camera(Point3(0, 0, 0),  // look from: camera position
+  Camera camera(Point3(0,0,0),  // look from: camera position
                 Point3(0, 0, -1), // look at: point we're looking at
                 Vec3(0, 1, 0),    // vup: "up" direction
                 45.0f,            // vfov: vertical field of view in degrees
@@ -248,7 +249,7 @@ int main(int argc, char **argv) {
   const Lambertian lambertian3(Color(0.75f, 0.5f, 0.25f));
   const Conductor conductor(Color(0.25f, 0.75f, 0.5f));
   const Lambertian lambertian4(Color(0.5, 0.75, 0.5));
-  const Conductor conductor2(Color(0.5, 0.5, 0.75));
+  const Conductor conductor2(Color(1.0,1.0,1.0));
   const Lambertian lambertian5(Color(0.5, 0.5, 0.75));
   const Lambertian lambertian6(Color(0.75, 0.75, 0.75));
 
@@ -262,6 +263,16 @@ int main(int argc, char **argv) {
   Sphere sphere8(Point3(10.0, 0.0, -3.0), 0.5f, &lambertian6);
   Sphere sphere9(Point3(-10.0, 0.0, -3.0), 0.5f, &lambertian6);
 
+  PlyMesh mesh("meshes/lowpoly.ply", &conductor);
+  mesh.scale(Vec3(0.3,0.3,0.3));
+  mesh.translate(Vec3(0.35, -0.35, -2.0));
+
+  PlyMesh mesh2("meshes/cube.ply", &conductor2);
+  mesh2.scale(Vec3(0.5,0.5,0.5));
+  mesh2.translate(Vec3(-1.5, 0.0, -3.0));
+
+  Sphere sphere10(Point3(-2.5, 0.0, 1.0), 1.0f, &lambertian3);
+  
   Light light2(Vec3(0, 0, 0), Vec3(10, 10, 10));
   Light light3(Vec3(-0.4, 0.5, -3.0), Vec3(0.5, 0.5, 0.5));
   Light light4(Vec3(0, 0, 90), Vec3(10000, 10000, 10000));
@@ -276,10 +287,14 @@ int main(int argc, char **argv) {
   scene.add_object(&sphere7);
   scene.add_object(&sphere8);
   scene.add_object(&sphere9);
+  scene.add_object(&sphere10);
+
+  scene.add_object(&mesh);
+  scene.add_object(&mesh2);
   scene.add_light(light2);
   scene.add_light(light3);
   scene.add_light(light4);
-
+  
   render_scene(scene, camera, image_width, image_height, samples_per_pixel,
                pixels, num_threads);
 

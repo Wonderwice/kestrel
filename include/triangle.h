@@ -35,7 +35,19 @@ public:
   bool hit(const Ray &ray, float t_min, float t_max,
            HitRecord &rec) const override;
 
-private:
+  /**
+   * @brief Scale the triangle by a factor along each axis
+   * @param factor Scaling factor for each axis
+   */
+  void scale(Vec3 factor);
+
+  /**
+   * @brief Translate the triangle by an offset vector
+   * @param offset Translation vector
+   */
+  void translate(Vec3 offset);
+
+  private:
   Point3 v0, v1, v2; ///< Vertices of the triangle
 };
 

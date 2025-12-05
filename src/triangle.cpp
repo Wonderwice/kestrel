@@ -1,4 +1,5 @@
 #include "triangle.h"
+#include <cmath>
 
 bool Triangle::hit(const Ray &ray, float t_min, float t_max,
                    HitRecord &rec) const {
@@ -16,6 +17,8 @@ bool Triangle::hit(const Ray &ray, float t_min, float t_max,
   Vec3 s = ray.origin - v0;
   float u = inv_det * Vec3::dot(s, h);
   Vec3 s_cross_e1 = Vec3::cross(s, edge1);
+  if ((u < 0 && std::abs(u) > eps) || (u > 1 && std::abs(u - 1) > eps))
+    return false; // Ray does not hit triangle
   float v = inv_det * Vec3::dot(ray.direction, s_cross_e1);
 
   if ((v < 0 && std::abs(v) > eps) || (u + v > 1 && std::abs(u + v - 1) > eps))
@@ -24,10 +27,23 @@ bool Triangle::hit(const Ray &ray, float t_min, float t_max,
   t = inv_det * Vec3::dot(edge2, s_cross_e1);
   if (t < t_min || t > t_max)
     return false; // Intersection out of bounds
+
   rec.t = t;
   rec.point = ray.at(t);
   Vec3 outward_normal = Vec3::cross(edge1, edge2).normalized();
   rec.set_face_normal(ray, outward_normal);
   rec.material = material;
   return true;
+}
+
+void Triangle::scale(Vec3 factor) {
+  v0 = v0 * factor.x;
+  v1 = v1 * factor.y;
+  v2 = v2 * factor.z;
+}
+
+void Triangle::translate(Vec3 offset) {
+  v0 = v0 + offset;
+  v1 = v1 + offset;
+  v2 = v2 + offset;
 }
