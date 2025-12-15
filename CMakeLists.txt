@@ -27,6 +27,8 @@ set(SOURCES
     src/sphere.cpp
     src/triangle.cpp
     src/plymesh.cpp
+    src/parser.cpp
+    src/logger.cpp
 )
 
 # Headers

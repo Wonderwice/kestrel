@@ -14,6 +14,7 @@
 #include "vec3.h"
 
 class Material; // Forward declaration
+class Scene;
 
 /**
  * @struct HitRecord
@@ -49,5 +50,11 @@ struct HitRecord {
     normal = front_face ? outward_normal : -1.0f * outward_normal;
   }
 };
+
+/**
+ * @brief Parse a scene described in the Mitsuba format.
+ * @param filepath Path to the scene file.
+ */
+Scene *read_from_file(const std::string &filepath);
 
 #endif // KESTREL_H

@@ -38,7 +38,7 @@ PlyMesh::PlyMesh(std::string filepath, const Material *material)
       std::istringstream iss(line);
       float x, y, z;
       iss >> x >> y >> z;
-      vertices.emplace_back(x,y,z);
+      vertices.emplace_back(x, y, z);
     }
   }
 
@@ -58,10 +58,7 @@ PlyMesh::PlyMesh(std::string filepath, const Material *material)
       }
     }
   }
-
-  std::cout << "Number of vertices: " << vertex_count << std::endl;
-  std::cout << "Number of faces: " << face_count << std::endl;
-  std::cout << "Number of triangles created: " << triangles.size() << std::endl;
+  file.close();
 }
 
 bool PlyMesh::hit(const Ray &ray, float t_min, float t_max,

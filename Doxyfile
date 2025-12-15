@@ -4,10 +4,11 @@ PROJECT_NUMBER         = "v0.1"
 PROJECT_BRIEF          = "A CPU/GPU rendering engine"
 
 # Input settings
-INPUT                  = include/
+INPUT                  = include/ README.md
 FILE_PATTERNS          = *.h
 RECURSIVE              = YES
 EXCLUDE_PATTERNS       = */build/* */.git/* */CMakeFiles/* */.github/*
+USE_MDFILE_AS_MAINPAGE = README.md
 
 # Output settings
 OUTPUT_DIRECTORY       = docs
@@ -25,12 +26,16 @@ EXTRACT_LOCAL_CLASSES  = NO
 JAVADOC_AUTOBRIEF      = YES
 QT_AUTOBRIEF           = YES
 MULTILINE_CPP_IS_BRIEF = NO
+HTML_COLORSTYLE	   = LIGHT
+FULL_SIDEBAR           = YES
 
 # Source browsing
 SOURCE_BROWSER         = NO
 INLINE_SOURCES         = NO
 REFERENCED_BY_RELATION = NO
 REFERENCES_RELATION    = NO
+HAVE_DOT               = NO
+CLASS_DIAGRAMS         = NO
 
 # Preprocessing
 ENABLE_PREPROCESSING   = YES

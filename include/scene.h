@@ -8,6 +8,7 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include "bsdfs/material.h"
 #include "camera.h"
 #include "light.h"
 #include "shape.h"
@@ -18,15 +19,18 @@
  */
 class Scene {
 public:
-  Camera camera;               ///< Camera used for rendering
-  std::vector<const Shape*> objects; ///< List of objects in the scene
-  std::vector<Light> lights;   ///< List of lights in the scene
+  const Camera *camera;               ///< Camera used for rendering
+  std::vector<const Shape *> objects; ///< List of objects in the scene
+  std::vector<Light> lights;          ///< List of lights in the scene
+  std::vector<const Material *> bsdfs;    ///< List of BSDFs in the scene
+
+  HOST_DEVICE Scene() {}
 
   /**
    * @brief Construct a new Scene object
    * @param cam Camera to use for the scene
    */
-  HOST_DEVICE Scene(const Camera &cam) : camera(cam) {}
+  HOST_DEVICE Scene(const Camera *cam) : camera(cam) {}
 
   /**
    * @brief Add an object to the scene
@@ -34,7 +38,13 @@ public:
    */
   HOST_DEVICE void add_object(const Shape *obj) { objects.push_back(obj); }
 
-   /**
+  /**
+   * @brief Add a bsdf to the scene
+   * @param bsdf BSDF to add
+   */
+  HOST_DEVICE void add_bsdf(const Material *bsdf) { bsdfs.push_back(bsdf); }
+
+  /**
    * @brief Add a light to the scene
    * @param light Light to add
    */

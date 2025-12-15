@@ -14,6 +14,7 @@
 #include "bsdfs/lambertian.h"
 #include "camera.h"
 #include "light.h"
+#include "logger.h"
 #include "plymesh.h"
 #include "ray.h"
 #include "scene.h"
@@ -114,13 +115,11 @@ Color ray_color(const Ray &ray, const Scene &scene, int depth = 10) {
  * This function divides the rendering workload across multiple threads,
  * each processing scanlines of the image until all rows are completed.
  */
-void render_scene(const Scene &scene, const Camera &camera, int image_width,
-                  int image_height, int samples_per_pixel,
+void render_scene(const Scene &scene, const Camera &camera, int samples_per_pixel,
                   std::vector<Color> &pixels, int num_threads) {
   // Render loop
-  std::cout << "Rendering " << image_width << "x" << image_height
-            << " image...\n";
-
+  LOG_INFO("Rendering " + std::to_string(camera.width()) + "x" +
+           std::to_string(camera.height()) + " image...");
   // Parallelize with std::thread
   std::vector<std::thread> threads;
   std::atomic<int> next_row(0);
@@ -130,23 +129,23 @@ void render_scene(const Scene &scene, const Camera &camera, int image_width,
     PCG32 thread_rng(rng.next() + thread_id); // Per-thread RNG
     while (true) {
       int j = next_row.fetch_add(1);
-      if (j >= image_height)
+      if (j >= camera.height())
         break;
 
-      if (j % 50 == 0 && thread_id == 0) {
-        std::cout << "Scanline " << j << "/" << image_height << "\n";
+      if (j % 50 == 0) {
+        LOG_INFO("Scanline " + std::to_string(j) + "/" + std::to_string(camera.height()));
       }
 
-      for (int i = 0; i < image_width; ++i) {
+      for (int i = 0; i < camera.width(); ++i) {
         Color pixel_color(0, 0, 0);
         for (int s = 0; s < samples_per_pixel; ++s) {
-          float u = (i + thread_rng.next_float()) / (image_width - 1);
-          float v = (j + thread_rng.next_float()) / (image_height - 1);
+          float u = (i + thread_rng.next_float()) / (camera.width() - 1);
+          float v = (j + thread_rng.next_float()) / (camera.height() - 1);
           Ray ray = camera.get_ray(u, v);
           pixel_color += ray_color(ray, scene);
         }
         pixel_color *= 1.0f / static_cast<float>(samples_per_pixel);
-        pixels[j * image_width + i] = pixel_color;
+        pixels[j * camera.width() + i] = pixel_color;
       }
     }
   };
@@ -200,107 +199,25 @@ void write_ppm(const std::string &filename, const std::vector<Color> &pixels,
 
 /**
  * @brief Main rendering function
- * @return Exit code (0 = success)
+ * @return Exit code
  *
  * Sets up the scene, camera, and image buffer, then renders by tracing
  * one ray per pixel and writing the output to a PPM file.
  */
 int main(int argc, char **argv) {
-  // Image settings
-  // Take width and height from command line arguments if provided
-  int image_width = 1920;
-  const float aspect_ratio = 16.0f / 9.0f;
-  const int samples_per_pixel = 5;
+  // Initialize logger
+  Logger *logger = Logger::get_instance();
+  logger->set_log_level(LogLevel::INFO);
+  LOG_INFO("Kestrel ray tracer starting");
 
-  int image_height = static_cast<int>(image_width / aspect_ratio);
-  if (argc >= 2) {
-    image_width = std::stoi(argv[1]);
-    image_height = static_cast<int>(image_width / aspect_ratio);
-  } else if (argc >= 3) {
-    image_width = std::stoi(argv[1]);
-    image_height = std::stoi(argv[2]);
-  }
+  Scene *scene = read_from_file("data/scene.xml");
+  int width = scene->camera->width();
+  int height = scene->camera->height();
 
-  int num_threads = -1;
-  if (argc >= 4) {
-    num_threads =
-        std::max((int)std::thread::hardware_concurrency(), std::stoi(argv[3]));
-  } else {
-    num_threads = std::thread::hardware_concurrency();
-  }
+  std::vector<Color> pixels(width * height);
 
-  if (argc >= 5) {
-    std::cout << "Usage: " << argv[0] << " [image_width] [image_height]\n";
-    return 1;
-  }
-
-  // Allocate pixel buffer
-  std::vector<Color> pixels(image_width * image_height);
-
-  // Camera setup: positioned at origin, looking down -Z axis
-  Camera camera(Point3(0,0,0),  // look from: camera position
-                Point3(0, 0, -1), // look at: point we're looking at
-                Vec3(0, 1, 0),    // vup: "up" direction
-                45.0f,            // vfov: vertical field of view in degrees
-                aspect_ratio);
-
-  const Lambertian lambertian(Color(0.5f, 0.25f, 0.25f));
-  const Lambertian lambertian2(Color(0.25f, 0.5f, 0.75f));
-  const Lambertian lambertian3(Color(0.75f, 0.5f, 0.25f));
-  const Conductor conductor(Color(0.25f, 0.75f, 0.5f));
-  const Lambertian lambertian4(Color(0.5, 0.75, 0.5));
-  const Conductor conductor2(Color(1.0,1.0,1.0));
-  const Lambertian lambertian5(Color(0.5, 0.5, 0.75));
-  const Lambertian lambertian6(Color(0.75, 0.75, 0.75));
-
-  Sphere sphere1(Point3(0.0, 0.0, 0.0), 100.0f, &lambertian);
-  Sphere sphere2(Point3(-0.35, 0.35, -3.5), 0.25f, &lambertian2);
-  Sphere sphere3(Point3(0.35, 0.35, -2.5), 0.35f, &lambertian3);
-  Sphere sphere4(Point3(0.35, -0.35, -2.0), 0.3f, &conductor);
-  Sphere sphere5(Point3(-0.35, -0.35, -4.0), 0.325f, &lambertian4);
-  Sphere sphere6(Point3(-1.5, 0.0, -3.0), 0.5f, &conductor2);
-  Sphere sphere7(Point3(1.5, 0.0, -3.0), 0.5f, &lambertian5);
-  Sphere sphere8(Point3(10.0, 0.0, -3.0), 0.5f, &lambertian6);
-  Sphere sphere9(Point3(-10.0, 0.0, -3.0), 0.5f, &lambertian6);
-
-  PlyMesh mesh("meshes/lowpoly.ply", &conductor);
-  mesh.scale(Vec3(0.3,0.3,0.3));
-  mesh.translate(Vec3(0.35, -0.35, -2.0));
-
-  PlyMesh mesh2("meshes/cube.ply", &conductor2);
-  mesh2.scale(Vec3(0.5,0.5,0.5));
-  mesh2.translate(Vec3(-1.5, 0.0, -3.0));
-
-  Sphere sphere10(Point3(-2.5, 0.0, 1.0), 1.0f, &lambertian3);
-  
-  Light light2(Vec3(0, 0, 0), Vec3(10, 10, 10));
-  Light light3(Vec3(-0.4, 0.5, -3.0), Vec3(0.5, 0.5, 0.5));
-  Light light4(Vec3(0, 0, 90), Vec3(10000, 10000, 10000));
-
-  Scene scene(camera);
-  scene.add_object(&sphere1);
-  scene.add_object(&sphere2);
-  scene.add_object(&sphere3);
-  scene.add_object(&sphere4);
-  scene.add_object(&sphere5);
-  scene.add_object(&sphere6);
-  scene.add_object(&sphere7);
-  scene.add_object(&sphere8);
-  scene.add_object(&sphere9);
-  scene.add_object(&sphere10);
-
-  scene.add_object(&mesh);
-  scene.add_object(&mesh2);
-  scene.add_light(light2);
-  scene.add_light(light3);
-  scene.add_light(light4);
-  
-  render_scene(scene, camera, image_width, image_height, samples_per_pixel,
-               pixels, num_threads);
-
-  // Write output file
-  write_ppm("output.ppm", pixels, image_width, image_height);
-  std::cout << "Done! Output written to output.ppm\n";
-
+  render_scene(*scene, *(scene->camera), 1, pixels, 12);
+  delete scene;
+  write_ppm("output.ppm", pixels, width, height);
   return 0;
 }

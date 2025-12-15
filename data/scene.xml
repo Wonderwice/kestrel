@@ -1,0 +1,141 @@
+<scene>
+    <!-- Camera Configuration -->
+    <camera type="perspective">
+        <transform name="toWorld">
+            <lookat origin="0, 0, 0" target="0, 0, -1" up="0, 1, 0"/>
+        </transform>
+        <float name="fov" value="45"/>
+        <integer name="width" value="800"/>
+        <integer name="height" value="600"/>
+    </camera>
+
+    <!-- emitter Sources -->
+    <emitter type="point">
+        <point name="position" value="0, 0, 0"/>
+        <rgb name="intensity" value="10, 10, 10"/>
+    </emitter>
+
+    <emitter type="point">
+        <point name="position" value="-0.4, 0.5, -3.0"/>
+        <rgb name="intensity" value="0.5, 0.5, 0.5"/>
+    </emitter>
+
+    <emitter type="point">
+        <point name="position" value="0, 0, 90"/>
+        <rgb name="intensity" value="10000, 10000, 10000"/>
+    </emitter>
+
+    <!-- Materials -->
+    <bsdf type="lambertian" id="lambertian">
+        <color value="0.5, 0.25, 0.25"/>
+    </bsdf>
+
+    <bsdf type="lambertian" id="lambertian2">
+        <color value="0.25, 0.5, 0.75"/>
+    </bsdf>
+
+    <bsdf type="lambertian" id="lambertian3">
+        <color value="0.75, 0.5, 0.25"/>
+    </bsdf>
+
+    <bsdf type="conductor" id="conductor">
+        <eta value="0.25, 0.75, 0.5"/>
+    </bsdf>
+
+    <bsdf type="lambertian" id="lambertian4">
+        <color value="0.5, 0.75, 0.5"/>
+    </bsdf>
+
+    <bsdf type="conductor" id="conductor2">
+        <eta value="1.0, 1.0, 1.0"/>
+    </bsdf>
+
+    <bsdf type="lambertian" id="lambertian5">
+        <color value="0.5, 0.5, 0.75"/>
+    </bsdf>
+
+    <bsdf type="lambertian" id="lambertian6">
+        <color value="0.75, 0.75, 0.75"/>
+    </bsdf>
+
+    <!-- Geometry (Spheres) -->
+    <shape type="sphere">
+        <point name="center" value="0, 0, 0"/>
+        <float name="radius" value="100"/>
+        <ref id="lambertian"/>
+    </shape>
+
+    <shape type="sphere">
+        <point name="center" value="-0.35, 0.35, -3.5"/>
+        <float name="radius" value="0.25"/>
+        <ref id="lambertian2"/>
+    </shape>
+
+    <shape type="sphere">
+        <point name="center" value="0.35, 0.35, -2.5"/>
+        <float name="radius" value="0.35"/>
+        <ref id="lambertian3"/>
+    </shape>
+
+    <!--<shape type="sphere">
+        <point name="center" value="0.35, -0.35, -2.0"/>
+        <float name="radius" value="0.3"/>
+        <ref id="conductor"/>
+    </shape>-->
+
+    <shape type="sphere">
+        <point name="center" value="-0.35, -0.35, -4.0"/>
+        <float name="radius" value="0.325"/>
+        <ref id="lambertian4"/>
+    </shape>
+
+    <shape type="sphere">
+        <point name="center" value="-1.5, 0.0, -3.0"/>
+        <float name="radius" value="0.5"/>
+        <ref id="conductor2"/>
+    </shape>
+
+    <shape type="sphere">
+        <point name="center" value="1.5, 0.0, -3.0"/>
+        <radius value="0.5"/>
+        <ref id="lambertian5"/>
+    </shape>
+
+    <shape type="sphere">
+        <point name="center" value="10.0, 0.0, -3.0"/>
+        <float name="radius" value="0.5"/>
+        <ref id="lambertian6"/>
+    </shape>
+
+    <shape type="sphere">      
+        <point name="center" value="-10.0, 0.0, -3.0"/>
+        <float name="radius" value="0.5"/>
+        <ref id="lambertian6"/>
+    </shape>
+
+    <shape type="sphere">
+        <point name="center" value="-2.5, 0.0, 1.0"/>
+        <float name="radius" value="1.0"/>
+        <ref id="lambertian3"/>
+    </shape>
+
+    <!-- Meshes -->
+    <shape type="plymesh">
+        <string name="filename" value="data/meshes/lowpoly.ply"/>
+        <transform name="toWorld">
+            <scale value="0.3, 0.3, 0.3"/>
+            <translate value="0.35, -0.35, -2.0"/>
+        </transform>
+        <ref id="conductor"/>
+    </shape>
+
+    <shape type="plymesh">
+        <string name="filename" value="data/meshes/cube.ply"/>
+        <transform name="toWorld">
+            <scale value="0.5, 0.5, 0.5"/>
+            <translate value="-1.5, 0.0, -3.0"/>
+        </transform>
+        <ref id="conductor2"/>
+    </shape>
+
+</scene>
