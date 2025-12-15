@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['front_5fface_0',['front_face',['../structHitRecord.html#a95d5e41521e7dd017ec39d583602c745',1,'HitRecord']]]
+  ['direction_0',['direction',['../classRay.html#a51f09a191b84f30d0e3891811b6513fc',1,'Ray']]]
 ];

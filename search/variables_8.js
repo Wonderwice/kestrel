@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['point_0',['point',['../structHitRecord.html#aae08a8b5e81208800310643101767b58',1,'HitRecord']]],
-  ['position_1',['position',['../classLight.html#a6e8f7d2f1e8e8367763265abd6ce0947',1,'Light']]]
+  ['objects_0',['objects',['../classScene.html#a0f1fe6932e49590b016f484dee0eb971',1,'Scene']]],
+  ['origin_1',['origin',['../classRay.html#af02b2b999fe8538e92ac5e534c68ae5f',1,'Ray']]]
 ];

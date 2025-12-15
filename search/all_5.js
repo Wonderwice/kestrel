@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['hit_0',['hit',['../classScene.html#a6b83fe5243f220601f4c1ba0e785b740',1,'Scene::hit()'],['../classSphere.html#a21c62239061e20a5d0c9d2515d5669e6',1,'Sphere::hit()']]],
-  ['hitrecord_1',['hitrecord',['../structHitRecord.html',1,'HitRecord'],['../structHitRecord.html#a84bd816eb5d9b83fc08258d6e9e36f49',1,'HitRecord::HitRecord()']]]
+  ['get_5fcolor_0',['get_color',['../classConductor.html#ab0e189824ae801398c82bb8cd5827ad7',1,'Conductor::get_color()'],['../classLambertian.html#acdad0066217e17db80f8ca46849c7eaa',1,'Lambertian::get_color()'],['../classMaterial.html#a13d20628df6e0d6f3760efbd1dc9bb01',1,'Material::get_color()']]],
+  ['get_5fintensity_1',['get_intensity',['../classLight.html#addf397c4009247406492ed6e47ecf88d',1,'Light']]],
+  ['get_5fray_2',['get_ray',['../classCamera.html#a9a1a37ac9a53c61ee8316d41f626a304',1,'Camera']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lights_0',['lights',['../classScene.html#ab3625e4ac3c6e47156edd23e2421e828',1,'Scene']]]
+  ['intensity_0',['intensity',['../classLight.html#a9a9ccef390a04e12c89578468d807d95',1,'Light']]]
 ];

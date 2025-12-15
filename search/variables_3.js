@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['intensity_0',['intensity',['../classLight.html#a9a9ccef390a04e12c89578468d807d95',1,'Light']]]
+  ['front_5fface_0',['front_face',['../structHitRecord.html#a95d5e41521e7dd017ec39d583602c745',1,'HitRecord']]]
 ];

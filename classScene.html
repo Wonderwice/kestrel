@@ -82,27 +82,20 @@ $(function() {
  <a href="classScene.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="scene_8h_source.html">scene.h</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for Scene:</div>
-<div class="dyncontent">
-<div class="center"><img src="classScene__coll__graph.png" border="0" usemap="#aScene_coll__map" alt="Collaboration graph"/></div>
-<map name="aScene_coll__map" id="aScene_coll__map">
-<area shape="rect" title="Represents a 3D scene with a camera and objects." alt="" coords="11,93,73,119"/>
-<area shape="rect" href="classCamera.html" title="Perspective camera with configurable field of view." alt="" coords="5,5,79,31"/>
-<area shape="poly" title=" " alt="" coords="45,45,45,93,39,93,39,45"/>
-</map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8e3091df6d3e2c42142f2dd3358b1dbb" id="r_a8e3091df6d3e2c42142f2dd3358b1dbb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a8e3091df6d3e2c42142f2dd3358b1dbb">Scene</a> (const <a class="el" href="classCamera.html">Camera</a> &amp;cam)</td></tr>
-<tr class="memdesc:a8e3091df6d3e2c42142f2dd3358b1dbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classScene.html" title="Represents a 3D scene with a camera and objects.">Scene</a> object.  <br /></td></tr>
-<tr class="separator:a8e3091df6d3e2c42142f2dd3358b1dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cda102f1007319d44f83462416d091d" id="r_a7cda102f1007319d44f83462416d091d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a7cda102f1007319d44f83462416d091d">add_object</a> (const <a class="el" href="classSphere.html">Sphere</a> &amp;obj)</td></tr>
-<tr class="memdesc:a7cda102f1007319d44f83462416d091d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an object to the scene.  <br /></td></tr>
-<tr class="separator:a7cda102f1007319d44f83462416d091d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad7bb09d0ac087fe5bc04b2f4816e995" id="r_aad7bb09d0ac087fe5bc04b2f4816e995"><td class="memItemLeft" align="right" valign="top"><a id="aad7bb09d0ac087fe5bc04b2f4816e995" name="aad7bb09d0ac087fe5bc04b2f4816e995"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add_light</b> (const <a class="el" href="classLight.html">Light</a> &amp;light)</td></tr>
+<tr class="memitem:a44e5c257feb8b9c9672b1efe45816ea2" id="r_a44e5c257feb8b9c9672b1efe45816ea2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a44e5c257feb8b9c9672b1efe45816ea2">Scene</a> (const <a class="el" href="classCamera.html">Camera</a> *cam)</td></tr>
+<tr class="memdesc:a44e5c257feb8b9c9672b1efe45816ea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classScene.html" title="Represents a 3D scene with a camera and objects.">Scene</a> object.  <br /></td></tr>
+<tr class="separator:a44e5c257feb8b9c9672b1efe45816ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3009051d7332560bb91914b08e5806ff" id="r_a3009051d7332560bb91914b08e5806ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a3009051d7332560bb91914b08e5806ff">add_object</a> (const <a class="el" href="classShape.html">Shape</a> *obj)</td></tr>
+<tr class="memdesc:a3009051d7332560bb91914b08e5806ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an object to the scene.  <br /></td></tr>
+<tr class="separator:a3009051d7332560bb91914b08e5806ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72d1388d387e0c58706590fe930bd76d" id="r_a72d1388d387e0c58706590fe930bd76d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a72d1388d387e0c58706590fe930bd76d">add_bsdf</a> (const <a class="el" href="classMaterial.html">Material</a> *bsdf)</td></tr>
+<tr class="memdesc:a72d1388d387e0c58706590fe930bd76d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a bsdf to the scene.  <br /></td></tr>
+<tr class="separator:a72d1388d387e0c58706590fe930bd76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad7bb09d0ac087fe5bc04b2f4816e995" id="r_aad7bb09d0ac087fe5bc04b2f4816e995"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#aad7bb09d0ac087fe5bc04b2f4816e995">add_light</a> (const <a class="el" href="classLight.html">Light</a> &amp;light)</td></tr>
+<tr class="memdesc:aad7bb09d0ac087fe5bc04b2f4816e995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a light to the scene.  <br /></td></tr>
 <tr class="separator:aad7bb09d0ac087fe5bc04b2f4816e995"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b83fe5243f220601f4c1ba0e785b740" id="r_a6b83fe5243f220601f4c1ba0e785b740"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classScene.html#a6b83fe5243f220601f4c1ba0e785b740">hit</a> (const <a class="el" href="classRay.html">Ray</a> &amp;ray, float t_min, float t_max, <a class="el" href="structHitRecord.html">HitRecord</a> &amp;rec) const</td></tr>
 <tr class="memdesc:a6b83fe5243f220601f4c1ba0e785b740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test ray against all objects in the scene for intersection.  <br /></td></tr>
@@ -110,24 +103,28 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>add_light</b> (const 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:afed13ec4ba2d7ab75b273d507911b498" id="r_afed13ec4ba2d7ab75b273d507911b498"><td class="memItemLeft" align="right" valign="top"><a id="afed13ec4ba2d7ab75b273d507911b498" name="afed13ec4ba2d7ab75b273d507911b498"></a>
-<a class="el" href="classCamera.html">Camera</a>&#160;</td><td class="memItemRight" valign="bottom"><b>camera</b></td></tr>
-<tr class="memdesc:afed13ec4ba2d7ab75b273d507911b498"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCamera.html" title="Perspective camera with configurable field of view.">Camera</a> used for rendering. <br /></td></tr>
-<tr class="separator:afed13ec4ba2d7ab75b273d507911b498"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac099a9060b6e8dd927cf0ae1dcc9e089" id="r_ac099a9060b6e8dd927cf0ae1dcc9e089"><td class="memItemLeft" align="right" valign="top"><a id="ac099a9060b6e8dd927cf0ae1dcc9e089" name="ac099a9060b6e8dd927cf0ae1dcc9e089"></a>
-std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>objects</b></td></tr>
-<tr class="memdesc:ac099a9060b6e8dd927cf0ae1dcc9e089"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of objects in the scene. <br /></td></tr>
-<tr class="separator:ac099a9060b6e8dd927cf0ae1dcc9e089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c477984f5472eb4c381fe7597df584f" id="r_a4c477984f5472eb4c381fe7597df584f"><td class="memItemLeft" align="right" valign="top"><a id="a4c477984f5472eb4c381fe7597df584f" name="a4c477984f5472eb4c381fe7597df584f"></a>
+const <a class="el" href="classCamera.html">Camera</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>camera</b></td></tr>
+<tr class="memdesc:a4c477984f5472eb4c381fe7597df584f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCamera.html" title="Perspective camera with configurable field of view.">Camera</a> used for rendering. <br /></td></tr>
+<tr class="separator:a4c477984f5472eb4c381fe7597df584f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f1fe6932e49590b016f484dee0eb971" id="r_a0f1fe6932e49590b016f484dee0eb971"><td class="memItemLeft" align="right" valign="top"><a id="a0f1fe6932e49590b016f484dee0eb971" name="a0f1fe6932e49590b016f484dee0eb971"></a>
+std::vector&lt; const <a class="el" href="classShape.html">Shape</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>objects</b></td></tr>
+<tr class="memdesc:a0f1fe6932e49590b016f484dee0eb971"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of objects in the scene. <br /></td></tr>
+<tr class="separator:a0f1fe6932e49590b016f484dee0eb971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3625e4ac3c6e47156edd23e2421e828" id="r_ab3625e4ac3c6e47156edd23e2421e828"><td class="memItemLeft" align="right" valign="top"><a id="ab3625e4ac3c6e47156edd23e2421e828" name="ab3625e4ac3c6e47156edd23e2421e828"></a>
 std::vector&lt; <a class="el" href="classLight.html">Light</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>lights</b></td></tr>
 <tr class="memdesc:ab3625e4ac3c6e47156edd23e2421e828"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of lights in the scene. <br /></td></tr>
 <tr class="separator:ab3625e4ac3c6e47156edd23e2421e828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43aca9158b350db0a3ba05543cfda1c0" id="r_a43aca9158b350db0a3ba05543cfda1c0"><td class="memItemLeft" align="right" valign="top"><a id="a43aca9158b350db0a3ba05543cfda1c0" name="a43aca9158b350db0a3ba05543cfda1c0"></a>
+std::vector&lt; const <a class="el" href="classMaterial.html">Material</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>bsdfs</b></td></tr>
+<tr class="memdesc:a43aca9158b350db0a3ba05543cfda1c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of BSDFs in the scene. <br /></td></tr>
+<tr class="separator:a43aca9158b350db0a3ba05543cfda1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a 3D scene with a camera and objects. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8e3091df6d3e2c42142f2dd3358b1dbb" name="a8e3091df6d3e2c42142f2dd3358b1dbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e3091df6d3e2c42142f2dd3358b1dbb">&#9670;&#160;</a></span>Scene()</h2>
+<a id="a44e5c257feb8b9c9672b1efe45816ea2" name="a44e5c257feb8b9c9672b1efe45816ea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44e5c257feb8b9c9672b1efe45816ea2">&#9670;&#160;</a></span>Scene()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -138,7 +135,7 @@ std::vector&lt; <a class="el" href="classLight.html">Light</a> &gt;&#160;</td><t
         <tr>
           <td class="memname">Scene::Scene </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classCamera.html">Camera</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classCamera.html">Camera</a> *&#160;</td>
           <td class="paramname"><em>cam</em></td><td>)</td>
           <td></td>
         </tr>
@@ -161,8 +158,76 @@ std::vector&lt; <a class="el" href="classLight.html">Light</a> &gt;&#160;</td><t
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7cda102f1007319d44f83462416d091d" name="a7cda102f1007319d44f83462416d091d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7cda102f1007319d44f83462416d091d">&#9670;&#160;</a></span>add_object()</h2>
+<a id="a72d1388d387e0c58706590fe930bd76d" name="a72d1388d387e0c58706590fe930bd76d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72d1388d387e0c58706590fe930bd76d">&#9670;&#160;</a></span>add_bsdf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scene::add_bsdf </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classMaterial.html">Material</a> *&#160;</td>
+          <td class="paramname"><em>bsdf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a bsdf to the scene. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bsdf</td><td>BSDF to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aad7bb09d0ac087fe5bc04b2f4816e995" name="aad7bb09d0ac087fe5bc04b2f4816e995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad7bb09d0ac087fe5bc04b2f4816e995">&#9670;&#160;</a></span>add_light()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scene::add_light </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classLight.html">Light</a> &amp;&#160;</td>
+          <td class="paramname"><em>light</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Add a light to the scene. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">light</td><td><a class="el" href="classLight.html">Light</a> to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3009051d7332560bb91914b08e5806ff" name="a3009051d7332560bb91914b08e5806ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3009051d7332560bb91914b08e5806ff">&#9670;&#160;</a></span>add_object()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -173,7 +238,7 @@ std::vector&lt; <a class="el" href="classLight.html">Light</a> &gt;&#160;</td><t
         <tr>
           <td class="memname">void Scene::add_object </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classSphere.html">Sphere</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classShape.html">Shape</a> *&#160;</td>
           <td class="paramname"><em>obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -188,7 +253,7 @@ std::vector&lt; <a class="el" href="classLight.html">Light</a> &gt;&#160;</td><t
 <p>Add an object to the scene. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">obj</td><td><a class="el" href="classSphere.html" title="Sphere primitive defined by center and radius.">Sphere</a> object to add </td></tr>
+    <tr><td class="paramname">obj</td><td><a class="el" href="classShape.html" title="Abstract base class for geometric shapes.">Shape</a> to add </td></tr>
   </table>
   </dd>
 </dl>

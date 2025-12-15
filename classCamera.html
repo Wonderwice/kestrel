@@ -84,19 +84,25 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5c49c50ac65a681643f58ca1f9368775" id="r_a5c49c50ac65a681643f58ca1f9368775"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a5c49c50ac65a681643f58ca1f9368775">Camera</a> (<a class="el" href="vec3_8h.html#aeef95635e817fbf8cf22cd14c8d88fc5">Point3</a> look_from, <a class="el" href="vec3_8h.html#aeef95635e817fbf8cf22cd14c8d88fc5">Point3</a> look_at, <a class="el" href="classVec3.html">Vec3</a> vup, float vfov, float aspect_ratio)</td></tr>
-<tr class="memdesc:a5c49c50ac65a681643f58ca1f9368775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a perspective camera.  <br /></td></tr>
-<tr class="separator:a5c49c50ac65a681643f58ca1f9368775"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6954cd69df859b9e77edd5738fef8a5" id="r_ae6954cd69df859b9e77edd5738fef8a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#ae6954cd69df859b9e77edd5738fef8a5">Camera</a> (<a class="el" href="vec3_8h.html#aeef95635e817fbf8cf22cd14c8d88fc5">Point3</a> look_from, <a class="el" href="vec3_8h.html#aeef95635e817fbf8cf22cd14c8d88fc5">Point3</a> look_at, <a class="el" href="classVec3.html">Vec3</a> vup, float vfov, int <a class="el" href="classCamera.html#a04ac2e66ea06fb4bdc8b319ce9ba17ae">width</a>, float aspect_ratio)</td></tr>
+<tr class="memdesc:ae6954cd69df859b9e77edd5738fef8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a perspective camera.  <br /></td></tr>
+<tr class="separator:ae6954cd69df859b9e77edd5738fef8a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a1a37ac9a53c61ee8316d41f626a304" id="r_a9a1a37ac9a53c61ee8316d41f626a304"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRay.html">Ray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a9a1a37ac9a53c61ee8316d41f626a304">get_ray</a> (float u, float v) const</td></tr>
 <tr class="memdesc:a9a1a37ac9a53c61ee8316d41f626a304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a ray for a given pixel coordinate.  <br /></td></tr>
 <tr class="separator:a9a1a37ac9a53c61ee8316d41f626a304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04ac2e66ea06fb4bdc8b319ce9ba17ae" id="r_a04ac2e66ea06fb4bdc8b319ce9ba17ae"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#a04ac2e66ea06fb4bdc8b319ce9ba17ae">width</a> () const</td></tr>
+<tr class="memdesc:a04ac2e66ea06fb4bdc8b319ce9ba17ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get image width in pixels.  <br /></td></tr>
+<tr class="separator:a04ac2e66ea06fb4bdc8b319ce9ba17ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa36f935d3bce10ef86fea9f6c90b8fde" id="r_aa36f935d3bce10ef86fea9f6c90b8fde"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCamera.html#aa36f935d3bce10ef86fea9f6c90b8fde">height</a> () const</td></tr>
+<tr class="memdesc:aa36f935d3bce10ef86fea9f6c90b8fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get image height in pixels.  <br /></td></tr>
+<tr class="separator:aa36f935d3bce10ef86fea9f6c90b8fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Perspective camera with configurable field of view. </p>
 <p>Implements a standard pinhole camera model with configurable position, orientation, and field of view. Uses a right-handed coordinate system where the camera looks down the negative Z axis. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5c49c50ac65a681643f58ca1f9368775" name="a5c49c50ac65a681643f58ca1f9368775"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c49c50ac65a681643f58ca1f9368775">&#9670;&#160;</a></span>Camera()</h2>
+<a id="ae6954cd69df859b9e77edd5738fef8a5" name="ae6954cd69df859b9e77edd5738fef8a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6954cd69df859b9e77edd5738fef8a5">&#9670;&#160;</a></span>Camera()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,6 +134,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>aspect_ratio</em>&#160;</td>
         </tr>
@@ -146,6 +158,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">look_at</td><td>Point the camera is looking at </td></tr>
     <tr><td class="paramname">vup</td><td>"Up" direction vector (typically (0, 1, 0)) </td></tr>
     <tr><td class="paramname">vfov</td><td>Vertical field of view in degrees </td></tr>
+    <tr><td class="paramname">width</td><td>Image width in pixels </td></tr>
     <tr><td class="paramname">aspect_ratio</td><td>Image aspect ratio (width / height)</td></tr>
   </table>
   </dd>
@@ -191,6 +204,62 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classRay.html" title="Represents a ray with origin and direction.">Ray</a> from camera origin through the (u, v) position on image plane</dd></dl>
 <p>The parameters (u, v) represent normalized coordinates on the image plane. (0, 0) is the bottom-left corner, (1, 1) is the top-right corner. </p>
+
+</div>
+</div>
+<a id="aa36f935d3bce10ef86fea9f6c90b8fde" name="aa36f935d3bce10ef86fea9f6c90b8fde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa36f935d3bce10ef86fea9f6c90b8fde">&#9670;&#160;</a></span>height()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Camera::height </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get image height in pixels. </p>
+<dl class="section return"><dt>Returns</dt><dd>Image height </dd></dl>
+
+</div>
+</div>
+<a id="a04ac2e66ea06fb4bdc8b319ce9ba17ae" name="a04ac2e66ea06fb4bdc8b319ce9ba17ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04ac2e66ea06fb4bdc8b319ce9ba17ae">&#9670;&#160;</a></span>width()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Camera::width </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get image width in pixels. </p>
+<dl class="section return"><dt>Returns</dt><dd>Image width </dd></dl>
 
 </div>
 </div>

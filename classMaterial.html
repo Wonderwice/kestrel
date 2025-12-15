@@ -82,24 +82,13 @@ $(function() {
  <a href="classMaterial.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="material_8h_source.html">material.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for Material:</div>
-<div class="dyncontent">
-<div class="center"><img src="classMaterial__inherit__graph.png" border="0" usemap="#aMaterial_inherit__map" alt="Inheritance graph"/></div>
-<map name="aMaterial_inherit__map" id="aMaterial_inherit__map">
-<area shape="rect" title="Material base class for ray tracing." alt="" coords="69,5,145,31"/>
-<area shape="rect" href="classConductor.html" title="Implements conductor reflection model This class provides methods to compute reflection directions fo..." alt="" coords="5,79,93,104"/>
-<area shape="poly" title=" " alt="" coords="91,43,61,80,57,77,87,40"/>
-<area shape="rect" href="classLambertian.html" title="Implements Lambertian diffuse reflection." alt="" coords="117,79,213,104"/>
-<area shape="poly" title=" " alt="" coords="127,40,158,77,154,80,123,43"/>
-</map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>Inherited by <a class="el" href="classConductor.html">Conductor</a>, and <a class="el" href="classLambertian.html">Lambertian</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab9ecee109773f9a6584fc11ec66eaa74" id="r_ab9ecee109773f9a6584fc11ec66eaa74"><td class="memItemLeft" align="right" valign="top"><a id="ab9ecee109773f9a6584fc11ec66eaa74" name="ab9ecee109773f9a6584fc11ec66eaa74"></a>
-HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>Material</b> (float reflectivity=0.0f)</td></tr>
-<tr class="memdesc:ab9ecee109773f9a6584fc11ec66eaa74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="memitem:ab9ecee109773f9a6584fc11ec66eaa74" id="r_ab9ecee109773f9a6584fc11ec66eaa74"><td class="memItemLeft" align="right" valign="top">HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaterial.html#ab9ecee109773f9a6584fc11ec66eaa74">Material</a> (float <a class="el" href="classMaterial.html#a8d977d0b7386da7e3ac6879f458d3f0f">reflectivity</a>=0.0f)</td></tr>
+<tr class="memdesc:ab9ecee109773f9a6584fc11ec66eaa74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:ab9ecee109773f9a6584fc11ec66eaa74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f7ea5b8091684538636d3dc34178cf5" id="r_a9f7ea5b8091684538636d3dc34178cf5"><td class="memItemLeft" align="right" valign="top">virtual HOST_DEVICE bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMaterial.html#a9f7ea5b8091684538636d3dc34178cf5">scatter</a> (const <a class="el" href="classRay.html">Ray</a> &amp;incoming, const <a class="el" href="structHitRecord.html">HitRecord</a> &amp;rec, <a class="el" href="vec3_8h.html#a2375f6915278a56faa971290b63119ab">Color</a> &amp;attenuation, <a class="el" href="classRay.html">Ray</a> &amp;scattered) const =0</td></tr>
 <tr class="memdesc:a9f7ea5b8091684538636d3dc34178cf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scatter an incoming ray.  <br /></td></tr>
@@ -112,11 +101,48 @@ HOST_DEVICE&#160;</td><td class="memItemRight" valign="bottom"><b>Material</b> (
 Public Attributes</h2></td></tr>
 <tr class="memitem:a8d977d0b7386da7e3ac6879f458d3f0f" id="r_a8d977d0b7386da7e3ac6879f458d3f0f"><td class="memItemLeft" align="right" valign="top"><a id="a8d977d0b7386da7e3ac6879f458d3f0f" name="a8d977d0b7386da7e3ac6879f458d3f0f"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>reflectivity</b></td></tr>
+<tr class="memdesc:a8d977d0b7386da7e3ac6879f458d3f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reflection for mirror materials. <br /></td></tr>
 <tr class="separator:a8d977d0b7386da7e3ac6879f458d3f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classMaterial.html" title="Material base class for ray tracing.">Material</a> base class for ray tracing. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p>Point light representation. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab9ecee109773f9a6584fc11ec66eaa74" name="ab9ecee109773f9a6584fc11ec66eaa74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9ecee109773f9a6584fc11ec66eaa74">&#9670;&#160;</a></span>Material()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HOST_DEVICE Material::Material </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>reflectivity</em> = <code>0.0f</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reflectivity</td><td>Reflection for mirror materials </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a13d20628df6e0d6f3760efbd1dc9bb01" name="a13d20628df6e0d6f3760efbd1dc9bb01"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a13d20628df6e0d6f3760efbd1dc9bb01">&#9670;&#160;</a></span>get_color()</h2>
 

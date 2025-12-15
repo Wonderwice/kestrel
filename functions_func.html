@@ -73,13 +73,15 @@ $(function() {
 <div class="textblock">Here is a list of all documented functions with links to the class documentation for each member:</div>
 
 <h3><a id="index_a" name="index_a"></a>- a -</h3><ul>
-<li>add_object()&#160;:&#160;<a class="el" href="classScene.html#a7cda102f1007319d44f83462416d091d">Scene</a></li>
+<li>add_bsdf()&#160;:&#160;<a class="el" href="classScene.html#a72d1388d387e0c58706590fe930bd76d">Scene</a></li>
+<li>add_light()&#160;:&#160;<a class="el" href="classScene.html#aad7bb09d0ac087fe5bc04b2f4816e995">Scene</a></li>
+<li>add_object()&#160;:&#160;<a class="el" href="classScene.html#a3009051d7332560bb91914b08e5806ff">Scene</a></li>
 <li>at()&#160;:&#160;<a class="el" href="classRay.html#ac5aafea40776d3c6c5271e6576ed0185">Ray</a></li>
 </ul>
 
 
 <h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
-<li>Camera()&#160;:&#160;<a class="el" href="classCamera.html#a5c49c50ac65a681643f58ca1f9368775">Camera</a></li>
+<li>Camera()&#160;:&#160;<a class="el" href="classCamera.html#ae6954cd69df859b9e77edd5738fef8a5">Camera</a></li>
 <li>Conductor()&#160;:&#160;<a class="el" href="classConductor.html#a560f3ac51bff68c4ef559ee806674656">Conductor</a></li>
 <li>cross()&#160;:&#160;<a class="el" href="classVec3.html#a6969beb35c30f5f00b9c42c4b06efc2d">Vec3</a></li>
 </ul>
@@ -92,12 +94,14 @@ $(function() {
 
 <h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
 <li>get_color()&#160;:&#160;<a class="el" href="classConductor.html#ab0e189824ae801398c82bb8cd5827ad7">Conductor</a>, <a class="el" href="classLambertian.html#acdad0066217e17db80f8ca46849c7eaa">Lambertian</a>, <a class="el" href="classMaterial.html#a13d20628df6e0d6f3760efbd1dc9bb01">Material</a></li>
+<li>get_intensity()&#160;:&#160;<a class="el" href="classLight.html#addf397c4009247406492ed6e47ecf88d">Light</a></li>
 <li>get_ray()&#160;:&#160;<a class="el" href="classCamera.html#a9a1a37ac9a53c61ee8316d41f626a304">Camera</a></li>
 </ul>
 
 
 <h3><a id="index_h" name="index_h"></a>- h -</h3><ul>
-<li>hit()&#160;:&#160;<a class="el" href="classScene.html#a6b83fe5243f220601f4c1ba0e785b740">Scene</a>, <a class="el" href="classSphere.html#a21c62239061e20a5d0c9d2515d5669e6">Sphere</a></li>
+<li>height()&#160;:&#160;<a class="el" href="classCamera.html#aa36f935d3bce10ef86fea9f6c90b8fde">Camera</a></li>
+<li>hit()&#160;:&#160;<a class="el" href="classPlyMesh.html#a76c18048363a2decc437f7583cf0c9dd">PlyMesh</a>, <a class="el" href="classScene.html#a6b83fe5243f220601f4c1ba0e785b740">Scene</a>, <a class="el" href="classShape.html#a19262e59bfe019eeb434eb36bd2dd6dc">Shape</a>, <a class="el" href="classSphere.html#a21c62239061e20a5d0c9d2515d5669e6">Sphere</a>, <a class="el" href="classTriangle.html#a005e2ce77dcb66325cd8ccd376b65e62">Triangle</a></li>
 <li>HitRecord()&#160;:&#160;<a class="el" href="structHitRecord.html#a84bd816eb5d9b83fc08258d6e9e36f49">HitRecord</a></li>
 </ul>
 
@@ -116,6 +120,8 @@ $(function() {
 
 
 <h3><a id="index_n" name="index_n"></a>- n -</h3><ul>
+<li>next()&#160;:&#160;<a class="el" href="classPCG32.html#a5bbecade4bb08e43527b86e4be460998">PCG32</a></li>
+<li>next_float()&#160;:&#160;<a class="el" href="classPCG32.html#a69627ad48933ca033c95fe0448aba078">PCG32</a></li>
 <li>normalized()&#160;:&#160;<a class="el" href="classVec3.html#ae9a32a15ee612fd8a5aeb6d32ec5f666">Vec3</a></li>
 </ul>
 
@@ -130,23 +136,50 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>PCG32()&#160;:&#160;<a class="el" href="classPCG32.html#a2d07b5d7a6700d037422a69ed48545a0">PCG32</a></li>
+<li>PlyMesh()&#160;:&#160;<a class="el" href="classPlyMesh.html#af7edb132659a0b09e7322ffe6feab6e2">PlyMesh</a></li>
+</ul>
+
+
 <h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
 <li>random()&#160;:&#160;<a class="el" href="classVec3.html#a0164dbd82be7e5d8319d1c0a504c2d06">Vec3</a></li>
+<li>random_in_unit_sphere()&#160;:&#160;<a class="el" href="classVec3.html#a4e515f20cd87468b02a004dea2903e4a">Vec3</a></li>
+<li>random_on_hemisphere()&#160;:&#160;<a class="el" href="classVec3.html#ab588a376d3ff724c82bcec1c5a084e22">Vec3</a></li>
+<li>random_unit_vector()&#160;:&#160;<a class="el" href="classVec3.html#adbc8ef118ca742684df540dd9d457c09">Vec3</a></li>
 <li>Ray()&#160;:&#160;<a class="el" href="classRay.html#a2e3d2c29f2df4ab3da10da79d4acb852">Ray</a></li>
 </ul>
 
 
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>sample_direction()&#160;:&#160;<a class="el" href="classLight.html#a1f1e4c5e2ba9241fa98d45f7a610f8a1">Light</a></li>
+<li>scale()&#160;:&#160;<a class="el" href="classPlyMesh.html#a068e2d12251c079d27c32d240fbd753f">PlyMesh</a>, <a class="el" href="classTriangle.html#aa082531ac4e759d18db7cd49f5670fe8">Triangle</a></li>
 <li>scatter()&#160;:&#160;<a class="el" href="classConductor.html#a236522931b02d7cff24f8bc6c127b0c3">Conductor</a>, <a class="el" href="classLambertian.html#a654eadd61872f1e4f125a430629592a5">Lambertian</a>, <a class="el" href="classMaterial.html#a9f7ea5b8091684538636d3dc34178cf5">Material</a></li>
-<li>Scene()&#160;:&#160;<a class="el" href="classScene.html#a8e3091df6d3e2c42142f2dd3358b1dbb">Scene</a></li>
+<li>Scene()&#160;:&#160;<a class="el" href="classScene.html#a44e5c257feb8b9c9672b1efe45816ea2">Scene</a></li>
 <li>set_face_normal()&#160;:&#160;<a class="el" href="structHitRecord.html#a2cd89fb5a065e6a3464f805ba1629fb1">HitRecord</a></li>
+<li>Shape()&#160;:&#160;<a class="el" href="classShape.html#a2524edd38f2992ac3a991d4a62a731a1">Shape</a></li>
 <li>Sphere()&#160;:&#160;<a class="el" href="classSphere.html#a972bfd106af22b3458acad9346307960">Sphere</a></li>
+</ul>
+
+
+<h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>translate()&#160;:&#160;<a class="el" href="classPlyMesh.html#aaf9f63e33541c2404658895d59c67a4e">PlyMesh</a>, <a class="el" href="classTriangle.html#a2b11c8a156e636697fabbdf81dea565f">Triangle</a></li>
+<li>Triangle()&#160;:&#160;<a class="el" href="classTriangle.html#a76e14a1e4f4670dc7e7849d49baace3a">Triangle</a></li>
 </ul>
 
 
 <h3><a id="index_v" name="index_v"></a>- v -</h3><ul>
 <li>Vec3()&#160;:&#160;<a class="el" href="classVec3.html#aae7a1ffaa1108a30c281da216d1cd312">Vec3</a></li>
+</ul>
+
+
+<h3><a id="index_w" name="index_w"></a>- w -</h3><ul>
+<li>width()&#160;:&#160;<a class="el" href="classCamera.html#a04ac2e66ea06fb4bdc8b319ce9ba17ae">Camera</a></li>
+</ul>
+
+
+<h3><a id="index__7E" name="index__7E"></a>- ~ -</h3><ul>
+<li>~Shape()&#160;:&#160;<a class="el" href="classShape.html#ac8ad2fd02e1e94beeb98e65ab795cd56">Shape</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

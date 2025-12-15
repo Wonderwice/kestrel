@@ -136,16 +136,16 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6969beb35c30f5f00b9c42c4b06efc2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute cross product of two vectors.  <br /></td></tr>
 <tr class="separator:a6969beb35c30f5f00b9c42c4b06efc2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0164dbd82be7e5d8319d1c0a504c2d06" id="r_a0164dbd82be7e5d8319d1c0a504c2d06"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVec3.html#a0164dbd82be7e5d8319d1c0a504c2d06">random</a> (float min, float max)</td></tr>
-<tr class="memdesc:a0164dbd82be7e5d8319d1c0a504c2d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random vector with each component in [min, max].  <br /></td></tr>
+<tr class="memdesc:a0164dbd82be7e5d8319d1c0a504c2d06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random vector with each component in the range [min, max].  <br /></td></tr>
 <tr class="separator:a0164dbd82be7e5d8319d1c0a504c2d06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbc8ef118ca742684df540dd9d457c09" id="r_adbc8ef118ca742684df540dd9d457c09"><td class="memItemLeft" align="right" valign="top"><a id="adbc8ef118ca742684df540dd9d457c09" name="adbc8ef118ca742684df540dd9d457c09"></a>
-static <a class="el" href="classVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>random_unit_vector</b> ()</td></tr>
+<tr class="memitem:adbc8ef118ca742684df540dd9d457c09" id="r_adbc8ef118ca742684df540dd9d457c09"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVec3.html#adbc8ef118ca742684df540dd9d457c09">random_unit_vector</a> ()</td></tr>
+<tr class="memdesc:adbc8ef118ca742684df540dd9d457c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random unit vector.  <br /></td></tr>
 <tr class="separator:adbc8ef118ca742684df540dd9d457c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e515f20cd87468b02a004dea2903e4a" id="r_a4e515f20cd87468b02a004dea2903e4a"><td class="memItemLeft" align="right" valign="top"><a id="a4e515f20cd87468b02a004dea2903e4a" name="a4e515f20cd87468b02a004dea2903e4a"></a>
-static <a class="el" href="classVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>random_in_unit_sphere</b> ()</td></tr>
+<tr class="memitem:a4e515f20cd87468b02a004dea2903e4a" id="r_a4e515f20cd87468b02a004dea2903e4a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVec3.html#a4e515f20cd87468b02a004dea2903e4a">random_in_unit_sphere</a> ()</td></tr>
+<tr class="memdesc:a4e515f20cd87468b02a004dea2903e4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random vector within the unit sphere.  <br /></td></tr>
 <tr class="separator:a4e515f20cd87468b02a004dea2903e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab588a376d3ff724c82bcec1c5a084e22" id="r_ab588a376d3ff724c82bcec1c5a084e22"><td class="memItemLeft" align="right" valign="top"><a id="ab588a376d3ff724c82bcec1c5a084e22" name="ab588a376d3ff724c82bcec1c5a084e22"></a>
-static <a class="el" href="classVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><b>random_on_hemisphere</b> (const <a class="el" href="classVec3.html">Vec3</a> &amp;normal)</td></tr>
+<tr class="memitem:ab588a376d3ff724c82bcec1c5a084e22" id="r_ab588a376d3ff724c82bcec1c5a084e22"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classVec3.html">Vec3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVec3.html#ab588a376d3ff724c82bcec1c5a084e22">random_on_hemisphere</a> (const <a class="el" href="classVec3.html">Vec3</a> &amp;normal)</td></tr>
+<tr class="memdesc:ab588a376d3ff724c82bcec1c5a084e22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a random vector on the hemisphere defined by a normal.  <br /></td></tr>
 <tr class="separator:ab588a376d3ff724c82bcec1c5a084e22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -611,15 +611,106 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>z</b></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Generate a random vector with each component in [min, max]. </p>
+<p>Generate a random vector with each component in the range [min, max]. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">min</td><td>Minimum component value </td></tr>
-    <tr><td class="paramname">max</td><td>Maximum component value </td></tr>
+    <tr><td class="paramname">min</td><td>The minimum value that any component of the vector can take. </td></tr>
+    <tr><td class="paramname">max</td><td>The maximum value that any component of the vector can take. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Random vector </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution.">Vec3</a> object representing the random vector where each component is in the range [min, max]. </dd></dl>
+
+</div>
+</div>
+<a id="a4e515f20cd87468b02a004dea2903e4a" name="a4e515f20cd87468b02a004dea2903e4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e515f20cd87468b02a004dea2903e4a">&#9670;&#160;</a></span>random_in_unit_sphere()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classVec3.html">Vec3</a> Vec3::random_in_unit_sphere </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate a random vector within the unit sphere. </p>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution.">Vec3</a> object representing a random vector inside the unit sphere. </dd></dl>
+
+</div>
+</div>
+<a id="ab588a376d3ff724c82bcec1c5a084e22" name="ab588a376d3ff724c82bcec1c5a084e22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab588a376d3ff724c82bcec1c5a084e22">&#9670;&#160;</a></span>random_on_hemisphere()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classVec3.html">Vec3</a> Vec3::random_on_hemisphere </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classVec3.html">Vec3</a> &amp;&#160;</td>
+          <td class="paramname"><em>normal</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate a random vector on the hemisphere defined by a normal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">normal</td><td>A <a class="el" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution.">Vec3</a> object representing the normal vector that defines the hemisphere. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution.">Vec3</a> object representing a random vector on the hemisphere defined by the normal. </dd></dl>
+
+</div>
+</div>
+<a id="adbc8ef118ca742684df540dd9d457c09" name="adbc8ef118ca742684df540dd9d457c09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbc8ef118ca742684df540dd9d457c09">&#9670;&#160;</a></span>random_unit_vector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classVec3.html">Vec3</a> Vec3::random_unit_vector </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate a random unit vector. </p>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="classVec3.html" title="A 3D vector class supporting both CPU and GPU execution.">Vec3</a> object representing a random unit vector. </dd></dl>
 
 </div>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kestrel: Main Page</title>
+<title>Kestrel: Kestrel</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,10 +69,58 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Kestrel Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Kestrel </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://github.com/Wonderwice/kestrel/actions"><img src="https://github.com/Wonderwice/kestrel/actions/workflows/ci.yml/badge.svg" alt="CI/CD Pipeline" style="pointer-events: none;" class="inline"/></a> <a href="https://Wonderwice.github.io/kestrel/"><img src="https://img.shields.io/badge/docs-online-blue.svg" alt="Documentation" style="pointer-events: none;" class="inline"/></a></p>
+<p>A rendering engine built in C++/CUDA.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Quick Start</h1>
+<div class="fragment"><div class="line">git clone https://github.com/Wonderwice/kestrel.git</div>
+<div class="line">cd kestrel</div>
+<div class="line">mkdir build &amp;&amp; cd build</div>
+<div class="line">cmake ..</div>
+<div class="line">make</div>
+<div class="line">./kestrel</div>
+</div><!-- fragment --><p>This will generate <code>output.ppm</code> in the build directory.</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Documentation</h1>
+<p><b>Online:</b> <a href="https://Wonderwice.github.io/kestrel/">https://Wonderwice.github.io/kestrel/</a></p>
+<p><b>Local generation:</b> </p><div class="fragment"><div class="line">doxygen Doxyfile</div>
+<div class="line">firefox docs/html/index.html</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+Viewing Output</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+On Linux/Mac:</h2>
+<div class="fragment"><div class="line"># Convert to PNG</div>
+<div class="line">convert output.ppm output.png</div>
+<div class="line"> </div>
+<div class="line"># Or view directly</div>
+<div class="line">display output.ppm  # ImageMagick</div>
+<div class="line">feh output.ppm      # feh</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
+On Windows:</h2>
+<ul>
+<li>Use IrfanView, GIMP, or Photoshop</li>
+<li>Or convert online at <a href="https://convertio.co/ppm-png/">https://convertio.co/ppm-png/</a></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Using Python:</h2>
+<div class="fragment"><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div>
+<div class="line">img = Image.open(<span class="stringliteral">&#39;output.ppm&#39;</span>)</div>
+<div class="line">img.show()</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+Architecture Notes</h1>
+<p>All geometric primitives and math operations are decorated with <code>__host__ __device__</code> for future CUDA compatibility. The codebase is structured to allow easy porting to GPU.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Resources</h1>
+<ul>
+<li><a href="https://raytracing.github.io/">Ray Tracing in One Weekend</a></li>
+<li><a href="https://www.pbr-book.org/">PBRT Book</a></li>
+<li><a href="https://www.scratchapixel.com/">Scratchapixel</a> </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
