@@ -1,0 +1,23 @@
+site_name: Kestrel
+site_description: A physically-based CPU path tracer
+site_url: http://wonderwice.com/kestrel
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: black
+    accent: deep orange
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - Scene Format: scene-format.md
+  - Sensors: sensors.md
+  - Emitters: emitters.md
+  - BSDFs: bsdfs.md
+  - Shapes: shapes.md
+  - Integrators: integrators.md

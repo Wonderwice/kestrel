@@ -39,3 +39,31 @@
 
 # debug information files
 *.dwo
+
+build/
+site/
+instructions/
+
+# Bundled assets are ignored, except two canonical example scenes so a fresh
+# clone can run the quick-start and reproduce the Veach MIS comparison.
+# (Note: the global *.obj rule above also matches Wavefront meshes, so the
+#  mesh files are re-included explicitly below.)
+data/*
+!data/scenes/
+data/scenes/*
+!data/scenes/cbox/
+!data/scenes/veach_mi/
+
+# Cornell box: keep only the traditional scene + its meshes
+data/scenes/cbox/*
+!data/scenes/cbox/cbox.xml
+!data/scenes/cbox/meshes/
+!data/scenes/cbox/meshes/*.obj
+
+# Veach MIS: keep the scene + geometry, drop the rendered EXR
+data/scenes/veach_mi/*
+!data/scenes/veach_mi/mi.xml
+!data/scenes/veach_mi/*.obj
+# local refactor verification harness
+.verify/
+.venv/
