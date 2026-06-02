@@ -1,0 +1,924 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A physically-based CPU path tracer">
+      
+      
+      
+        <link rel="canonical" href="http://wonderwice.com/kestrel/integrators/">
+      
+      
+        <link rel="prev" href="../shapes/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Integrators - Kestrel</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#integrators" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Kestrel" class="md-header__button md-logo" aria-label="Kestrel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kestrel
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Integrators
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Kestrel" class="md-nav__button md-logo" aria-label="Kestrel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Kestrel
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scene-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scene Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emitters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emitters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bsdfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BSDFs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shapes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shapes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrators
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#path-tracer-i-path-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path tracer — -i path (default)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Path tracer — -i path (default)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#light-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Light transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-illumination-i-direct-and-i-direct_bsdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direct illumination — -i direct and -i direct_bsdf
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Direct illumination — -i direct and -i direct_bsdf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#light-transport_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Light transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison-the-veach-mis-scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison: the Veach MIS scene
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#path-tracer-i-path-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path tracer — -i path (default)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Path tracer — -i path (default)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#light-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Light transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-illumination-i-direct-and-i-direct_bsdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direct illumination — -i direct and -i direct_bsdf
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Direct illumination — -i direct and -i direct_bsdf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#light-transport_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Light transport
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison-the-veach-mis-scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparison: the Veach MIS scene
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="integrators">Integrators</h1>
+<p>The integrator is selected at the command line with <code>-i &lt;name&gt;</code>. It determines how light transport is simulated.</p>
+<hr />
+<h2 id="path-tracer-i-path-default">Path tracer — <code>-i path</code> <em>(default)</em></h2>
+<p>A unidirectional path tracer. Each camera ray spawns a path that bounces through the scene until it reaches a light source, escapes, or is terminated by Russian roulette. Direct lighting at each bounce is estimated by Next Event Estimation (NEE), and the NEE and BSDF-sampled contributions are combined using Multiple Importance Sampling (MIS) with the power heuristic (β = 2).</p>
+<p>The MIS is <strong>deterministic</strong> (Veach's multi-sample model): every non-specular bounce shoots <em>both</em> a light ray (NEE shadow ray) and a BSDF ray (the path continuation), and sums their power-heuristic-weighted contributions — it never randomly selects a single strategy. The light strategy is weighted <code>w = power(p_light, p_bsdf)</code>; the BSDF strategy's emission (collected when the continuation lands on an emitter) is weighted <code>w = power(p_bsdf, p_light)</code>. Specular/delta lobes (<code>pdf = 0</code>) skip the light ray and carry weight 1. The two pdfs are mutually exact for single-emitter scenes; with multiple area lights NEE uses the selected light's pdf while the BSDF strategy uses the full light-mixture pdf — both unbiased.</p>
+<h3 id="properties">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global illumination</td>
+<td>Yes — indirect bounces, colour bleeding, caustics (via BSDF sampling)</td>
+</tr>
+<tr>
+<td>MIS</td>
+<td>Power heuristic, β = 2</td>
+</tr>
+<tr>
+<td>NEE</td>
+<td>One sample per area light, one sample per environment map</td>
+</tr>
+<tr>
+<td>Russian roulette</td>
+<td>Starts at bounce 3; max survival probability 0.95</td>
+</tr>
+<tr>
+<td>Hard depth cap</td>
+<td>64 bounces</td>
+</tr>
+</tbody>
+</table>
+<h3 id="light-transport">Light transport</h3>
+<ul>
+<li><strong>Point lights</strong> — shadow ray per light; 1/r² falloff; MIS weight = 1 (delta distribution).</li>
+<li><strong>Area emitters</strong> — one NEE sample from a randomly chosen emitter, combined with BSDF-sampling MIS.</li>
+<li><strong>Environment map</strong> — one importance-sampled direction, combined with BSDF-sampling MIS.</li>
+<li><strong>Emissive hit via BSDF sampling</strong> — weighted against the area light PDF to avoid double-counting.</li>
+</ul>
+<h3 id="usage">Usage</h3>
+<pre><code class="language-bash">kestrel scene.xml -o output.exr           # path integrator (default)
+kestrel scene.xml -o output.exr -i path   # explicit
+</code></pre>
+<p>The path integrator is the correct choice for scenes with indirect illumination, area lights, glass, and environment maps. Increase <code>sampleCount</code> in the scene file to reduce noise.</p>
+<hr />
+<h2 id="direct-illumination-i-direct-and-i-direct_bsdf">Direct illumination — <code>-i direct</code> and <code>-i direct_bsdf</code></h2>
+<p>Single-bounce integrators. Only the first surface hit from the camera is shaded; no recursive scattering occurs. Each comes in a single, deliberately <em>un-combined</em> sampling strategy — these are the two estimators that the path integrator's MIS blends, exposed separately so their individual strengths and failure modes are visible (see the comparison below).</p>
+<ul>
+<li><strong><code>-i direct</code></strong> — <strong>light sampling (NEE) only.</strong> For each surface point, one NEE sample is drawn from each light source present. Clean on rough/diffuse surfaces; noisy on near-specular ones, where a sampled light point rarely lands inside the narrow BSDF lobe.</li>
+<li><strong><code>-i direct_bsdf</code></strong> — <strong>BSDF sampling only.</strong> One ray is scattered according to the BSDF; its contribution is kept if it lands on an emitter. Clean on near-specular surfaces; noisy on rough ones, where a wide BSDF sample rarely hits a small, bright light.</li>
+</ul>
+<h3 id="properties_1">Properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global illumination</td>
+<td>No — no interreflection or indirect colour bleeding</td>
+</tr>
+<tr>
+<td>MIS</td>
+<td>None (each mode is a single strategy)</td>
+</tr>
+<tr>
+<td>NEE</td>
+<td><code>direct</code>: one sample per area light, one per environment map</td>
+</tr>
+<tr>
+<td>Russian roulette</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Recursion depth</td>
+<td>1 (camera ray + one shadow or scatter ray)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="light-transport_1">Light transport</h3>
+<ul>
+<li><strong>Point lights</strong> (<code>direct</code>) — same as path integrator.</li>
+<li><strong>Area emitters</strong> — <code>direct</code>: one uniform NEE sample; <code>direct_bsdf</code>: emission kept when the scattered ray lands on the emitter. No MIS in either.</li>
+<li><strong>Environment map</strong> — <code>direct</code>: one importance-sampled direction; <code>direct_bsdf</code>: emission from the escaped ray. No MIS.</li>
+<li><strong>Specular surfaces</strong> — <code>direct</code> returns black on delta BSDFs (a sampled light direction is never the mirror direction); <code>direct_bsdf</code> handles them correctly.</li>
+</ul>
+<h3 id="usage_1">Usage</h3>
+<pre><code class="language-bash">kestrel scene.xml -o output.png -i direct        # light sampling
+kestrel scene.xml -o output.png -i direct_bsdf   # BSDF sampling
+</code></pre>
+<p>The direct integrators are faster per sample and useful for:
+- Verifying material and lighting setup before a full path-traced render.
+- Scenes lit exclusively by point lights where indirect light is negligible.
+- Debugging: if the direct result looks wrong, the issue is in geometry or materials, not path-tracing logic.</p>
+<p>They will underestimate brightness in scenes with significant indirect illumination (e.g. Cornell box, interior scenes).</p>
+<hr />
+<h2 id="comparison-the-veach-mis-scene">Comparison: the Veach MIS scene</h2>
+<p>The classic test from Eric Veach's thesis (<code>data/scenes/veach_mi/mi.xml</code>) makes the trade-off concrete: four plates of increasing glossiness reflect four area lights of decreasing size. No single estimator is good everywhere.</p>
+<pre><code class="language-bash">kestrel data/scenes/veach_mi/mi.xml -i direct_bsdf -s 32 -o veach_bsdf.exr   # BSDF sampling only
+kestrel data/scenes/veach_mi/mi.xml -i direct      -s 32 -o veach_light.exr  # light sampling only
+kestrel data/scenes/veach_mi/mi.xml -i path        -s 32 -o veach_path.exr   # full path tracer w/ MIS
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">BSDF sampling (<code>direct_bsdf</code>)</th>
+<th style="text-align: center;">Light sampling (<code>direct</code>)</th>
+<th style="text-align: center;">Path tracer + MIS (<code>path</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="BSDF sampling" src="../images/veach_32spp/veach_bsdf.png" /></td>
+<td style="text-align: center;"><img alt="Light sampling" src="../images/veach_32spp/veach_light.png" /></td>
+<td style="text-align: center;"><img alt="Path tracer with MIS" src="../images/veach_32spp/veach_path.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>All three are rendered at 32 spp.</p>
+<ul>
+<li><strong>BSDF sampling</strong> is clean on the glossy plates (the scattered ray follows the lobe) but very noisy where the lights are small and bright — those directions are rarely sampled by a broad BSDF lobe.</li>
+<li><strong>Light sampling</strong> is the mirror image: clean where lights are large, noisy on the near-specular plates, where a point sampled on a light almost never lands inside the tight reflection lobe.</li>
+<li><strong>The path tracer</strong> combines both per bounce with the power heuristic (β = 2), so each region is denoised by whichever strategy samples it well. It is also a <em>full</em> path tracer, so unlike the two single-bounce direct modes it additionally carries indirect illumination — which is why this is MIS path tracing rather than a direct-only MIS estimator.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

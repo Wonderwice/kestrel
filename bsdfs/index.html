@@ -1,0 +1,1551 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A physically-based CPU path tracer">
+      
+      
+      
+        <link rel="canonical" href="http://wonderwice.com/kestrel/bsdfs/">
+      
+      
+        <link rel="prev" href="../emitters/">
+      
+      
+        <link rel="next" href="../shapes/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>BSDFs - Kestrel</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bsdfs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Kestrel" class="md-header__button md-logo" aria-label="Kestrel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kestrel
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BSDFs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Kestrel" class="md-nav__button md-logo" aria-label="Kestrel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Kestrel
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scene-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scene Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sensors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sensors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emitters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emitters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BSDFs
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BSDFs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#diffuse-typediffuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diffuse — type="diffuse"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diffuse — type=&#34;diffuse&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mirror-conductor-typemirror-typeconductor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mirror / Conductor — type="mirror" / type="conductor"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mirror / Conductor — type=&#34;mirror&#34; / type=&#34;conductor&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dielectric-typedielectric-typeglass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dielectric — type="dielectric" / type="glass"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dielectric — type=&#34;dielectric&#34; / type=&#34;glass&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rough-dielectric-typeroughdielectric-typeroughglass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rough dielectric — type="roughdielectric" / type="roughglass"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rough dielectric — type=&#34;roughdielectric&#34; / type=&#34;roughglass&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rough-conductor-typeroughconductor-typeroughplastic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rough conductor — type="roughconductor" / type="roughplastic"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rough conductor — type=&#34;roughconductor&#34; / type=&#34;roughplastic&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phong-blinn-typephong-typeblinn-typeblinn_microfacet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phong / Blinn — type="phong" / type="blinn" / type="blinn_microfacet"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phong / Blinn — type=&#34;phong&#34; / type=&#34;blinn&#34; / type=&#34;blinn_microfacet&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plastic-typeplastic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plastic — type="plastic"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plastic — type=&#34;plastic&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emitter-bsdf-typeemitter-typearea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Emitter BSDF — type="emitter" / type="area"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Emitter BSDF — type=&#34;emitter&#34; / type=&#34;area&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-sided-wrapper-typetwosided" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-sided wrapper — type="twosided"
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shapes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shapes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integrators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#diffuse-typediffuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diffuse — type="diffuse"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diffuse — type=&#34;diffuse&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mirror-conductor-typemirror-typeconductor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mirror / Conductor — type="mirror" / type="conductor"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mirror / Conductor — type=&#34;mirror&#34; / type=&#34;conductor&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dielectric-typedielectric-typeglass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dielectric — type="dielectric" / type="glass"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dielectric — type=&#34;dielectric&#34; / type=&#34;glass&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rough-dielectric-typeroughdielectric-typeroughglass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rough dielectric — type="roughdielectric" / type="roughglass"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rough dielectric — type=&#34;roughdielectric&#34; / type=&#34;roughglass&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rough-conductor-typeroughconductor-typeroughplastic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rough conductor — type="roughconductor" / type="roughplastic"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rough conductor — type=&#34;roughconductor&#34; / type=&#34;roughplastic&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phong-blinn-typephong-typeblinn-typeblinn_microfacet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phong / Blinn — type="phong" / type="blinn" / type="blinn_microfacet"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phong / Blinn — type=&#34;phong&#34; / type=&#34;blinn&#34; / type=&#34;blinn_microfacet&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plastic-typeplastic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plastic — type="plastic"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plastic — type=&#34;plastic&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emitter-bsdf-typeemitter-typearea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Emitter BSDF — type="emitter" / type="area"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Emitter BSDF — type=&#34;emitter&#34; / type=&#34;area&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-sided-wrapper-typetwosided" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-sided wrapper — type="twosided"
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="bsdfs">BSDFs</h1>
+<p>Materials are attached to shapes either inline or via a named reference. A named BSDF is declared at the top level with an <code>id</code> attribute and referenced from shapes using <code>&lt;ref id="..."/&gt;</code>.</p>
+<p>Each material below shows a preview rendered on the standard material-test ball under an environment map (the <code>matpreview</code> scene). Regenerate the swatches with <code>python3 .verify/render_matpreview_gallery.py</code>.</p>
+<hr />
+<h2 id="diffuse-typediffuse">Diffuse — <code>type="diffuse"</code></h2>
+<p>Lambertian (perfectly diffuse) reflectance. Scatters light equally in all directions above the surface. The surface colour can be specified as a constant RGB value or as a bitmap texture. An optional normal map adds tangent-space surface detail without extra geometry.</p>
+<p><img alt="Diffuse material preview" src="../images/materials/diffuse.png" /></p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reflectance</code></td>
+<td>rgb or bitmap</td>
+<td><code>0, 0, 0</code></td>
+<td>Diffuse albedo. Values should be in [0, 1].</td>
+</tr>
+<tr>
+<td><code>normalmap</code></td>
+<td>bitmap</td>
+<td><em>(none)</em></td>
+<td>Tangent-space normal map. RGB image encoded as <code>[0,1]</code> → <code>[-1,1]</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples">Examples</h3>
+<p><strong>Constant colour:</strong></p>
+<pre><code class="language-xml">&lt;bsdf type=&quot;diffuse&quot; id=&quot;white_wall&quot;&gt;
+    &lt;rgb name=&quot;reflectance&quot; value=&quot;0.8, 0.8, 0.8&quot;/&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<p><strong>Bitmap texture:</strong></p>
+<pre><code class="language-xml">&lt;bsdf type=&quot;diffuse&quot; id=&quot;wood_floor&quot;&gt;
+    &lt;texture type=&quot;bitmap&quot; name=&quot;reflectance&quot;&gt;
+        &lt;string name=&quot;filename&quot; value=&quot;textures/wood.png&quot;/&gt;
+    &lt;/texture&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<p><strong>Texture + normal map:</strong></p>
+<pre><code class="language-xml">&lt;bsdf type=&quot;diffuse&quot; id=&quot;stone&quot;&gt;
+    &lt;texture type=&quot;bitmap&quot; name=&quot;reflectance&quot;&gt;
+        &lt;string name=&quot;filename&quot; value=&quot;textures/stone_albedo.png&quot;/&gt;
+    &lt;/texture&gt;
+    &lt;texture type=&quot;bitmap&quot; name=&quot;normalmap&quot;&gt;
+        &lt;string name=&quot;filename&quot; value=&quot;textures/stone_normal.png&quot;/&gt;
+    &lt;/texture&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<p>Image textures are expected in sRGB space and are linearised on load. UV coordinates come from the mesh; OBJ files supply them via <code>vt</code> entries.</p>
+<hr />
+<h2 id="mirror-conductor-typemirror-typeconductor">Mirror / Conductor — <code>type="mirror"</code> / <code>type="conductor"</code></h2>
+<p>A perfect specular reflector (the two type names are equivalent). Reflects every incident ray into the mirror direction with no roughness. This is a delta BSDF — it has no diffuse component and contributes nothing to direct illumination samples.</p>
+<p><img alt="Conductor material preview" src="../images/materials/conductor.png" /></p>
+<h3 id="parameters_1">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reflectance</code></td>
+<td>rgb</td>
+<td><code>1, 1, 1</code></td>
+<td>Spectral tint applied to reflections. Use <code>1, 1, 1</code> for a neutral silver mirror.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code class="language-xml">&lt;bsdf type=&quot;mirror&quot; id=&quot;silver&quot;&gt;
+    &lt;rgb name=&quot;reflectance&quot; value=&quot;0.9, 0.9, 0.9&quot;/&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<hr />
+<h2 id="dielectric-typedielectric-typeglass">Dielectric — <code>type="dielectric"</code> / <code>type="glass"</code></h2>
+<p>A smooth dielectric interface (e.g. glass, water, crystal) governed by Fresnel equations. Both reflection and refraction are simulated, including total internal reflection. The surface has no diffuse component.</p>
+<p><img alt="Dielectric material preview" src="../images/materials/dielectric.png" /></p>
+<h3 id="parameters_2">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>intIOR</code> or <code>ior</code></td>
+<td>float</td>
+<td><code>1.5</code></td>
+<td>Index of refraction of the medium inside the surface. The exterior is assumed to be air (IOR = 1.0).</td>
+</tr>
+</tbody>
+</table>
+<p>Common IOR values: glass ≈ 1.5, water ≈ 1.33, diamond ≈ 2.42.</p>
+<h3 id="example_1">Example</h3>
+<pre><code class="language-xml">&lt;bsdf type=&quot;dielectric&quot; id=&quot;glass_sphere&quot;&gt;
+    &lt;float name=&quot;intIOR&quot; value=&quot;1.5&quot;/&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<pre><code class="language-xml">&lt;!-- water surface --&gt;
+&lt;bsdf type=&quot;glass&quot; id=&quot;water&quot;&gt;
+    &lt;float name=&quot;ior&quot; value=&quot;1.33&quot;/&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<hr />
+<h2 id="rough-dielectric-typeroughdielectric-typeroughglass">Rough dielectric — <code>type="roughdielectric"</code> / <code>type="roughglass"</code></h2>
+<p>A GGX microfacet dielectric: frosted glass that both reflects and refracts through a rough interface. Smaller <code>alpha</code> approaches a smooth dielectric.</p>
+<p><img alt="Rough dielectric material preview" src="../images/materials/roughdielectric.png" /></p>
+<blockquote>
+<p><strong>Sampling:</strong> micro-normals are drawn from the full GGX NDF (Walter et al. 2007), not from the <em>distribution of visible normals</em> (vNDF, Heitz 2018). vNDF sampling never generates back-facing microfacets and collapses the throughput weight to the masking-shadowing ratio <code>G₂/G₁</code>, which would noticeably cut variance here — especially at higher <code>alpha</code>.</p>
+</blockquote>
+<h3 id="parameters_3">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>intIOR</code> or <code>ior</code></td>
+<td>float</td>
+<td><code>1.5</code></td>
+<td>Interior index of refraction (exterior is air).</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>float</td>
+<td><code>0.1</code></td>
+<td>GGX roughness parameter.</td>
+</tr>
+<tr>
+<td><code>specularReflectance</code></td>
+<td>rgb</td>
+<td><code>1, 1, 1</code></td>
+<td>Spectral tint applied to the interface.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_2">Example</h3>
+<pre><code class="language-xml">&lt;bsdf type=&quot;roughdielectric&quot; id=&quot;frosted_glass&quot;&gt;
+    &lt;float name=&quot;intIOR&quot; value=&quot;1.5&quot;/&gt;
+    &lt;float name=&quot;alpha&quot; value=&quot;0.2&quot;/&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<hr />
+<h2 id="rough-conductor-typeroughconductor-typeroughplastic">Rough conductor — <code>type="roughconductor"</code> / <code>type="roughplastic"</code></h2>
+<p>A GGX microfacet BSDF modelling a rough reflective surface. The distribution of microfacet normals follows the GGX (Trowbridge-Reitz) model. Increasing <code>alpha</code> makes the surface appear more matte.</p>
+<p><img alt="Rough conductor material preview" src="../images/materials/roughconductor.png" /></p>
+<h3 id="parameters_4">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eta</code> or <code>reflectance</code></td>
+<td>rgb</td>
+<td><code>0.8, 0.8, 0.8</code></td>
+<td>Spectral reflectance tint.</td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td>float</td>
+<td><code>0.3</code></td>
+<td>GGX roughness parameter. Range (0, 1]: <code>0.01</code> is near-mirror, <code>0.8</code> is very rough.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_3">Example</h3>
+<pre><code class="language-xml">&lt;bsdf type=&quot;roughconductor&quot; id=&quot;brushed_gold&quot;&gt;
+    &lt;rgb name=&quot;eta&quot; value=&quot;1.0, 0.77, 0.33&quot;/&gt;
+    &lt;float name=&quot;alpha&quot; value=&quot;0.15&quot;/&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<hr />
+<h2 id="phong-blinn-typephong-typeblinn-typeblinn_microfacet">Phong / Blinn — <code>type="phong"</code> / <code>type="blinn"</code> / <code>type="blinn_microfacet"</code></h2>
+<p>Classic glossy reflectance models driven by a specular <code>exponent</code> (the cosine-power; higher = sharper highlight). <code>phong</code> and <code>blinn</code> are the energy-normalised lobes; <code>blinn_microfacet</code> uses the Blinn distribution in a microfacet formulation.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><code>phong</code></th>
+<th style="text-align: center;"><code>blinn</code></th>
+<th style="text-align: center;"><code>blinn_microfacet</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><img alt="Phong preview" src="../images/materials/phong.png" /></td>
+<td style="text-align: center;"><img alt="Blinn preview" src="../images/materials/blinn.png" /></td>
+<td style="text-align: center;"><img alt="Blinn microfacet preview" src="../images/materials/blinn_microfacet.png" /></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_5">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reflectance</code></td>
+<td>rgb or bitmap</td>
+<td><code>0.8, 0.8, 0.8</code></td>
+<td>Diffuse/specular base colour.</td>
+</tr>
+<tr>
+<td><code>exponent</code></td>
+<td>float</td>
+<td><code>50</code></td>
+<td>Glossy exponent; larger is shinier.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_4">Example</h3>
+<pre><code class="language-xml">&lt;bsdf type=&quot;blinn&quot; id=&quot;glossy_red&quot;&gt;
+    &lt;rgb name=&quot;reflectance&quot; value=&quot;0.7, 0.1, 0.1&quot;/&gt;
+    &lt;float name=&quot;exponent&quot; value=&quot;120&quot;/&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<hr />
+<h2 id="plastic-typeplastic">Plastic — <code>type="plastic"</code></h2>
+<p>A smooth coated diffuse surface: a Fresnel-weighted specular coat over a diffuse substrate.</p>
+<p><img alt="Plastic material preview" src="../images/materials/plastic.png" /></p>
+<h3 id="parameters_6">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reflectance</code></td>
+<td>rgb or bitmap</td>
+<td><code>0.5, 0.5, 0.5</code></td>
+<td>Diffuse substrate colour.</td>
+</tr>
+<tr>
+<td><code>eta</code>, <code>intIOR</code>, or <code>int_ior</code></td>
+<td>float</td>
+<td><code>1.5</code></td>
+<td>Index of refraction of the dielectric coat.</td>
+</tr>
+<tr>
+<td><code>nonlinear</code></td>
+<td>boolean</td>
+<td><code>false</code></td>
+<td>Enable Mitsuba's coloured internal-scattering model.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_5">Example</h3>
+<pre><code class="language-xml">&lt;bsdf type=&quot;plastic&quot; id=&quot;red_plastic&quot;&gt;
+    &lt;rgb name=&quot;reflectance&quot; value=&quot;0.8, 0.1, 0.1&quot;/&gt;
+    &lt;float name=&quot;intIOR&quot; value=&quot;1.49&quot;/&gt;
+&lt;/bsdf&gt;
+</code></pre>
+<hr />
+<h2 id="emitter-bsdf-typeemitter-typearea">Emitter BSDF — <code>type="emitter"</code> / <code>type="area"</code></h2>
+<p>Marks a surface as a light source when declared as a named BSDF. This is equivalent to the inline <code>&lt;emitter type="area"&gt;</code> syntax but allows the emissive material to be reused across multiple shapes.</p>
+<h3 id="parameters_7">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>radiance</code> or <code>emission</code></td>
+<td>rgb</td>
+<td><code>1, 1, 1</code></td>
+<td>Emitted radiance.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_6">Example</h3>
+<pre><code class="language-xml">&lt;bsdf type=&quot;emitter&quot; id=&quot;ceiling_light&quot;&gt;
+    &lt;rgb name=&quot;radiance&quot; value=&quot;10, 8, 6&quot;/&gt;
+&lt;/bsdf&gt;
+
+&lt;shape type=&quot;rectangle&quot;&gt;
+    &lt;transform name=&quot;toWorld&quot;&gt;
+        &lt;scale x=&quot;0.5&quot; y=&quot;0.5&quot; z=&quot;0.5&quot;/&gt;
+        &lt;translate x=&quot;0&quot; y=&quot;2.5&quot; z=&quot;0&quot;/&gt;
+        &lt;rotate angle=&quot;90&quot; x=&quot;1&quot;/&gt;
+    &lt;/transform&gt;
+    &lt;ref id=&quot;ceiling_light&quot;/&gt;
+&lt;/shape&gt;
+</code></pre>
+<hr />
+<h2 id="two-sided-wrapper-typetwosided">Two-sided wrapper — <code>type="twosided"</code></h2>
+<p>A Mitsuba compatibility wrapper. Kestrel's BSDFs are already evaluated on both faces, so a <code>&lt;bsdf type="twosided"&gt;</code> is transparently unwrapped to its inner BSDF — you can leave the wrapper in imported scenes without effect.</p>
+<pre><code class="language-xml">&lt;bsdf type=&quot;twosided&quot; id=&quot;wall&quot;&gt;
+    &lt;bsdf type=&quot;diffuse&quot;&gt;
+        &lt;rgb name=&quot;reflectance&quot; value=&quot;0.8, 0.8, 0.8&quot;/&gt;
+    &lt;/bsdf&gt;
+&lt;/bsdf&gt;
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
